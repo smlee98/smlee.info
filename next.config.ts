@@ -1,7 +1,60 @@
-import type { NextConfig } from "next";
+import type { NextConfig } from "next"
 
 const nextConfig: NextConfig = {
-  /* config options here */
-};
+  reactStrictMode: true,
+  typedRoutes: true,
+  transpilePackages: ["next-mdx-remote"],
+  devIndicators: false,
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "avatars.githubusercontent.com",
+        port: "",
+      },
+      {
+        protocol: "https",
+        hostname: "github.com",
+        port: "",
+      },
+    ],
+    qualities: [75, 100],
+  },
+  compiler:
+    process.env.NODE_ENV === "production"
+      ? {
+          removeConsole: {
+            exclude: ["error"],
+          },
+        }
+      : undefined,
+  async rewrites() {
+    return [
+      {
+        source: "/:section(blog|components)/:slug.mdx",
+        destination: "/doc.mdx/:slug",
+      },
+      {
+        source: "/:section(blog|components)/:slug",
+        destination: "/doc.mdx/:slug",
+        has: [
+          {
+            type: "header",
+            key: "accept",
+            value: "(?<accept>.*text/markdown.*)",
+          },
+        ],
+      },
+      {
+        source: "/rss",
+        destination: "/blog/rss",
+      },
+      {
+        source: "/registry/rss",
+        destination: "/components/rss",
+      },
+    ]
+  },
+}
 
-export default nextConfig;
+export default nextConfig

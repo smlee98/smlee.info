@@ -1,0 +1,17 @@
+{
+  "short_name": "이승민",
+  "name": "이승민 — Fullstack Developer",
+  "description": "프론트엔드부터 인프라까지, 완성도 있는 제품을 만드는 풀스택 개발자입니다.",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "type": "image/svg+xml",
+      "sizes": "any",
+      "purpose": "any"
+    }
+  ],
+  "id": "/?utm_source=pwa",
+  "start_url": "/?utm_source=pwa",
+  "display": "standalone",
+  "scope": "/"
+}

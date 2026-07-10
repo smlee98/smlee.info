@@ -1,0 +1,212 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "smlee",
+  "homepage": "https://smlee.info/components",
+  "items": [
+    {
+      "name": "haptic",
+      "title": "Haptic Feedback",
+      "description": "Trigger haptic feedback on mobile devices.",
+      "files": [
+        {
+          "path": "src/registry/lib/haptic/haptic.ts",
+          "type": "registry:lib",
+          "target": "@lib/haptic.ts"
+        }
+      ],
+      "docs": "https://smlee.info/components/haptic",
+      "categories": [
+        "utilities"
+      ],
+      "type": "registry:lib",
+      "author": "ncdai <dai@chanhdai.com>"
+    },
+    {
+      "name": "text-flip",
+      "title": "Text Flip",
+      "description": "Animated text that cycles through items with a smooth flip transition.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "src/registry/components/text-flip/text-flip.tsx",
+          "type": "registry:component",
+          "target": "@components/text-flip.tsx"
+        }
+      ],
+      "docs": "https://smlee.info/components/text-flip",
+      "categories": [
+        "text-effects"
+      ],
+      "type": "registry:component",
+      "author": "ncdai <dai@chanhdai.com>"
+    },
+    {
+      "name": "chevrons-up-down-icon",
+      "description": "Animated chevrons icon that morphs between up and down directions.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "src/registry/components/chevrons-up-down-icon/chevrons-up-down-icon.tsx",
+          "type": "registry:component",
+          "target": "@components/chevrons-up-down-icon.tsx"
+        }
+      ],
+      "docs": "https://smlee.info/components/chevrons-up-down-icon",
+      "categories": [
+        "effects"
+      ],
+      "type": "registry:component",
+      "author": "ncdai <dai@chanhdai.com>"
+    },
+    {
+      "name": "copy-button",
+      "title": "Copy Button",
+      "description": "Copy text to clipboard with visual, haptic, and audio feedback.",
+      "dependencies": [
+        "motion",
+        "@rexa-developer/tiks",
+        "web-haptics"
+      ],
+      "registryDependencies": [
+        "button",
+        "https://smlee.info/r/icon-swap.json"
+      ],
+      "files": [
+        {
+          "path": "src/registry/components/copy-button/copy-button.tsx",
+          "type": "registry:component",
+          "target": "@components/copy-button.tsx"
+        },
+        {
+          "path": "src/hooks/use-copy-to-clipboard.ts",
+          "type": "registry:hook",
+          "target": "@hooks/use-copy-to-clipboard.ts"
+        }
+      ],
+      "docs": "https://smlee.info/components/copy-button",
+      "categories": [
+        "utilities"
+      ],
+      "type": "registry:component",
+      "author": "ncdai <dai@chanhdai.com>"
+    },
+    {
+      "name": "middle-truncation",
+      "title": "Middle Truncation",
+      "description": "Truncate text in the middle while preserving start and end.",
+      "files": [
+        {
+          "path": "src/registry/components/middle-truncation/middle-truncation.tsx",
+          "type": "registry:component",
+          "target": "@components/middle-truncation.tsx"
+        }
+      ],
+      "docs": "https://smlee.info/components/middle-truncation",
+      "categories": [
+        "typography"
+      ],
+      "type": "registry:component",
+      "author": "ncdai <dai@chanhdai.com>"
+    },
+    {
+      "name": "contribution-graph",
+      "title": "Contribution Graph",
+      "description": "A GitHub-style contribution graph component that displays activity levels over time.",
+      "dependencies": [
+        "date-fns"
+      ],
+      "files": [
+        {
+          "path": "src/registry/components/contribution-graph/contribution-graph.tsx",
+          "type": "registry:component",
+          "target": "@components/contribution-graph.tsx"
+        }
+      ],
+      "docs": "https://www.kibo-ui.com/components/contribution-graph",
+      "categories": [
+        "data-display"
+      ],
+      "type": "registry:component",
+      "author": "ncdai <dai@chanhdai.com>"
+    },
+    {
+      "name": "github-contributions",
+      "title": "GitHub Contributions",
+      "description": "Visualize year-long GitHub contribution activity with daily counts, tooltips, and a profile link.",
+      "dependencies": [
+        "date-fns"
+      ],
+      "registryDependencies": [
+        "tooltip",
+        "spinner",
+        "https://smlee.info/r/contribution-graph.json"
+      ],
+      "files": [
+        {
+          "path": "src/registry/components/github-contributions/github-contributions.tsx",
+          "type": "registry:component",
+          "target": "@components/github-contributions.tsx"
+        },
+        {
+          "path": "src/registry/components/github-contributions/lib/get-cached-contributions.ts",
+          "type": "registry:lib",
+          "target": "@lib/get-cached-contributions.ts"
+        }
+      ],
+      "css": {
+        "@utility link-underline": {
+          "@apply underline decoration-current/30 decoration-1 underline-offset-3 transition-colors hover:decoration-current": {}
+        }
+      },
+      "docs": "https://smlee.info/components/github-contributions",
+      "categories": [
+        "data-display"
+      ],
+      "type": "registry:component",
+      "author": "ncdai <dai@chanhdai.com>"
+    },
+    {
+      "name": "icon-swap",
+      "title": "Icon Swap",
+      "description": "Animate icon swaps with scale, blur, and fade transitions.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "src/registry/components/icon-swap/icon-swap.tsx",
+          "type": "registry:component",
+          "target": "@components/icon-swap.tsx"
+        }
+      ],
+      "docs": "https://smlee.info/components/icon-swap",
+      "categories": [
+        "effects"
+      ],
+      "type": "registry:component",
+      "author": "ncdai <dai@chanhdai.com>"
+    },
+    {
+      "name": "dot-grid-spotlight",
+      "title": "Dot Grid Spotlight",
+      "description": "Interactive dot grid with a cursor-tracking spotlight effect.",
+      "files": [
+        {
+          "path": "src/registry/components/dot-grid-spotlight/dot-grid-spotlight.tsx",
+          "type": "registry:component",
+          "target": "@components/dot-grid-spotlight.tsx"
+        }
+      ],
+      "docs": "https://smlee.info/components/dot-grid-spotlight",
+      "categories": [
+        "effects"
+      ],
+      "type": "registry:component",
+      "author": "ncdai <dai@chanhdai.com>"
+    }
+  ]
+}
