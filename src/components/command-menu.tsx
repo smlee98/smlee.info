@@ -5,6 +5,7 @@ import { useRouter } from "@bprogress/next/app"
 import {
   BoxIcon,
   BriefcaseBusinessIcon,
+  BuildingIcon,
   CircleCheckBigIcon,
   CornerDownLeftIcon,
   FileTextIcon,
@@ -108,6 +109,12 @@ const PORTFOLIO_LINKS: CommandLinkItem[] = [
     href: "/#projects",
     kind: "page",
     icon: <BoxIcon />,
+  },
+  {
+    title: "Work Projects",
+    href: "/#work-projects",
+    kind: "page",
+    icon: <BuildingIcon />,
   },
   {
     title: "Certifications",

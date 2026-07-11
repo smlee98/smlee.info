@@ -5,7 +5,7 @@ import { getBlogPosts } from "@/features/doc/data/documents"
 import { getLLMText } from "@/features/doc/lib/get-llm-text"
 import { CERTIFICATIONS } from "@/features/portfolio/data/certifications"
 import { EXPERIENCES } from "@/features/portfolio/data/experiences"
-import { PROJECTS } from "@/features/portfolio/data/projects"
+import { PROJECTS, WORK_PROJECTS } from "@/features/portfolio/data/projects"
 import { SOCIAL_LINKS } from "@/features/portfolio/data/social-links"
 import { TECH_STACK } from "@/features/portfolio/data/tech-stack"
 import { USER } from "@/features/portfolio/data/user"
@@ -44,13 +44,25 @@ ${EXPERIENCES.map((item) =>
 ).join("\n\n")}
 `
 
+const renderProjectsText = (projects: typeof PROJECTS) =>
+  projects
+    .map((item) => {
+      const github = item.github ? `\n\nGitHub: ${item.github}` : ""
+      const skills = `\n\nSkills: ${item.skills.join(", ")}`
+      const description = item.description
+        ? `\n\n${item.description.trim()}`
+        : ""
+      return `### ${item.title}\n\nProject URL: ${item.link}${github}${skills}${description}`
+    })
+    .join("\n\n")
+
 const projectsText = `## Projects
 
-${PROJECTS.map((item) => {
-  const skills = `\n\nSkills: ${item.skills.join(", ")}`
-  const description = item.description ? `\n\n${item.description.trim()}` : ""
-  return `### ${item.title}\n\nProject URL: ${item.link}${skills}${description}`
-}).join("\n\n")}
+${renderProjectsText(PROJECTS)}
+
+## Work Projects (사내 프로젝트)
+
+${renderProjectsText(WORK_PROJECTS)}
 `
 
 const certificationsText = `## Certifications
@@ -61,7 +73,7 @@ async function getBlogContent() {
   const text = await Promise.all(
     allPosts.map(
       async (item) =>
-        `---\ntitle: "${item.metadata.title}"\ndescription: "${item.metadata.description}"\nlast_updated: "${format(new Date(item.metadata.updatedAt), "MMMM d, yyyy")}"\nsource: "${SITE_INFO.url}/blog/${item.slug}"\n---\n\n${await getLLMText(item)}`
+        `---\ntitle: "${item.metadata.title}"\ndescription: "${item.metadata.description}"\nlast_updated: "${format(new Date(item.metadata.updatedAt), "yyyy-MM-dd")}"\nsource: "${SITE_INFO.url}/blog/${item.slug}"\n---\n\n${await getLLMText(item)}`
     )
   )
   return text.join("\n\n")

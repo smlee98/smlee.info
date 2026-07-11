@@ -18,6 +18,7 @@ import {
   TooltipTrigger,
 } from "@/components/base/ui/tooltip"
 import { Prose } from "@/components/base/ui/typography"
+import { GitHubIcon } from "@/components/icons"
 import { Markdown } from "@/components/markdown"
 
 import type { Project } from "../../types/projects"
@@ -80,6 +81,27 @@ export function ProjectItem({
                 </dd>
               </dl>
             </div>
+
+            {project.github && (
+              <Tooltip>
+                <TooltipTrigger
+                  render={
+                    <a
+                      className="relative flex size-6 shrink-0 items-center justify-center text-muted-foreground after:absolute after:-inset-2 hover:text-foreground"
+                      href={addQueryParams(project.github, UTM_PARAMS)}
+                      target="_blank"
+                      rel="noopener"
+                      aria-label="Open GitHub repository"
+                    >
+                      <GitHubIcon className="pointer-events-none size-4" />
+                    </a>
+                  }
+                />
+                <TooltipContent>
+                  <p>Open GitHub repository</p>
+                </TooltipContent>
+              </Tooltip>
+            )}
 
             <Tooltip>
               <TooltipTrigger
