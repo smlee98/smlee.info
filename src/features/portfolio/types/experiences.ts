@@ -3,10 +3,10 @@ export type ExperiencePosition = {
   title: string
   /**
    * Employment period of the position.
-   * Use "MM.YYYY" or "YYYY" format. Omit `end` for current roles.
+   * Use "YYYY.MM" or "YYYY" format. Omit `end` for current roles.
    */
   employmentPeriod: {
-    /** Start date (e.g., "10.2022" or "2020"). */
+    /** Start date (e.g., "2022.10" or "2020"). */
     start: string
     /** End date; leave undefined for "Present". */
     end?: string

@@ -13,7 +13,7 @@ export const EXPERIENCES: Experience[] = [
         id: "1",
         title: "대리 / Fullstack Developer",
         employmentPeriod: {
-          start: "03.2020",
+          start: "2020.03",
         },
         employmentType: "Full-time",
         icon: <CodeXmlIcon />,

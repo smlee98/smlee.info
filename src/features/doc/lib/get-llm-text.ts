@@ -19,5 +19,5 @@ ${doc.metadata.description}
 
 ${processed.value}
 
-Last updated on ${format(new Date(doc.metadata.updatedAt), "MMMM d, yyyy")}`
+Last updated on ${format(new Date(doc.metadata.updatedAt), "yyyy-MM-dd")}`
 }

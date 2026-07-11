@@ -7,8 +7,8 @@ export const EDUCATION: Education[] = [
     degree: "학사",
     fieldOfStudy: "소프트웨어공학과",
     period: {
-      start: "03.2022",
-      end: "08.2025",
+      start: "2022.03",
+      end: "2025.08",
     },
   },
   {
@@ -16,8 +16,8 @@ export const EDUCATION: Education[] = [
     school: "한국폴리텍대학교 청주캠퍼스",
     fieldOfStudy: "정보통신시스템과",
     period: {
-      start: "03.2016",
-      end: "02.2020",
+      start: "2016.03",
+      end: "2020.02",
     },
   },
 ]
