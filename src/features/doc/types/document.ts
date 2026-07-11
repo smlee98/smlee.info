@@ -13,6 +13,11 @@ export type DocMetadata = {
    */
   category?: string
   /**
+   * Related project name (e.g. "krdscn/ui"). Rendered as a badge in post
+   * lists so posts can be grouped by project at a glance.
+   */
+  project?: string
+  /**
    * Flag to show a "New" badge/highlight in the UI.
    */
   new?: boolean

@@ -3,6 +3,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { format } from "date-fns"
 
+import { Tag } from "@/components/ui/tag"
 import type { Doc } from "@/features/doc/types/document"
 
 type HeadingTypes = "h2" | "h3" | "h4"
@@ -54,10 +55,11 @@ export function PostItem({
 
         <dl>
           <dt className="sr-only">Published on</dt>
-          <dd className="text-sm text-muted-foreground">
+          <dd className="flex items-center gap-2 text-sm text-muted-foreground">
             <time dateTime={new Date(post.metadata.createdAt).toISOString()}>
-              {format(new Date(post.metadata.createdAt), "dd.MM.yyyy")}
+              {format(new Date(post.metadata.createdAt), "yyyy.MM.dd")}
             </time>
+            {post.metadata.project && <Tag>{post.metadata.project}</Tag>}
           </dd>
         </dl>
       </div>

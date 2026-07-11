@@ -1,7 +1,6 @@
 import Link from "next/link"
 import { ArrowRightIcon } from "lucide-react"
 
-import { cn } from "@/lib/utils"
 import { Button } from "@/components/base/ui/button"
 import { PostItem } from "@/features/blog/components/post-item"
 import { getBlogPosts } from "@/features/doc/data/documents"
@@ -29,20 +28,9 @@ export function Blog() {
       </PanelHeader>
 
       <div className="relative py-4">
-        <div className="pointer-events-none absolute inset-0 -z-1 grid grid-cols-1 gap-4 max-sm:hidden sm:grid-cols-2">
-          <div className="border-r border-line"></div>
-          <div className="border-l border-line"></div>
-        </div>
-
-        <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+        <ul className="grid grid-cols-1 gap-4">
           {allPosts.slice(0, 6).map((post) => (
-            <li
-              key={post.slug}
-              className={cn(
-                "max-sm:screen-line-top max-sm:screen-line-bottom",
-                "sm:nth-[2n+1]:screen-line-top sm:nth-[2n+1]:screen-line-bottom"
-              )}
-            >
+            <li key={post.slug} className="screen-line-top screen-line-bottom">
               <PostItem post={post} headingAs="h3" imageLoading="lazy" />
             </li>
           ))}

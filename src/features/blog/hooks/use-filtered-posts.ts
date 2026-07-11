@@ -7,10 +7,12 @@ const normalize = (text: string) => text.toLowerCase().replaceAll(" ", "")
 const matchesQuery = (post: Doc, normalizedQuery: string) => {
   const normalizedTitle = normalize(post.metadata.title)
   const normalizedDescription = normalize(post.metadata.description)
+  const normalizedProject = normalize(post.metadata.project ?? "")
 
   return (
     normalizedTitle.includes(normalizedQuery) ||
-    normalizedDescription.includes(normalizedQuery)
+    normalizedDescription.includes(normalizedQuery) ||
+    normalizedProject.includes(normalizedQuery)
   )
 }
 
