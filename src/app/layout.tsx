@@ -9,6 +9,7 @@ import { JSON_LD_ID, personJsonLd } from "@/config/json-ld"
 import { META_THEME_COLORS, SITE_INFO } from "@/config/site"
 import { fontVariables } from "@/lib/fonts"
 import { JsonLdScript } from "@/lib/json-ld"
+import { InlineScript } from "@/components/inline-script"
 import { Providers } from "@/components/providers"
 import { USER } from "@/features/portfolio/data/user"
 
@@ -36,6 +37,13 @@ const darkModeScript = String.raw`
       document.documentElement.classList.add('os-macos')
     }
   } catch (_) {}
+`
+
+const avatarLightsScript = String.raw`
+  try {
+    var value = localStorage.getItem('avatarLights');
+    document.documentElement.dataset.avatarLights = JSON.parse(value || '"on"');
+  } catch(_) {}
 `
 
 export const metadata: Metadata = {
@@ -101,26 +109,13 @@ export default function RootLayout({
   return (
     <html lang="ko" className={fontVariables} suppressHydrationWarning>
       <head>
-        <script
-          type="text/javascript"
-          dangerouslySetInnerHTML={{ __html: darkModeScript }}
-        />
+        <InlineScript html={darkModeScript} />
         {/*
           Thanks @tailwindcss. We inject the script via the `<Script/>` tag again,
           since we found the regular `<script>` tag to not execute when rendering a not-found page.
          */}
         <Script src={`data:text/javascript;base64,${btoa(darkModeScript)}`} />
-        <script
-          type="text/javascript"
-          dangerouslySetInnerHTML={{
-            __html: `
-              try {
-                var value = localStorage.getItem('avatarLights');
-                document.documentElement.dataset.avatarLights = JSON.parse(value || '"on"');
-              } catch(_) {}
-            `,
-          }}
-        />
+        <InlineScript html={avatarLightsScript} />
         <JsonLdScript data={getWebSiteJsonLd()} />
       </head>
 

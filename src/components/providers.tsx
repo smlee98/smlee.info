@@ -19,6 +19,12 @@ export function Providers({ children }: { children: React.ReactNode }) {
         storageKey="theme"
         defaultTheme="system"
         attribute="class"
+        // Same trick as InlineScript: keep the theme script executable in the
+        // server HTML but inert on client renders so React doesn't warn.
+        scriptProps={{
+          type:
+            typeof window === "undefined" ? "text/javascript" : "text/plain",
+        }}
       >
         <ProgressProvider
           color="var(--foreground)"
