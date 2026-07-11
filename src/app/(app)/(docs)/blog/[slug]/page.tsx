@@ -1,6 +1,7 @@
 import type { Metadata, Route } from "next"
 import Link from "next/link"
 import { notFound } from "next/navigation"
+import { format } from "date-fns"
 import { getTableOfContents } from "fumadocs-core/content/toc"
 import { ArrowLeftIcon, ArrowRightIcon } from "lucide-react"
 import type { BlogPosting as PageSchema, WithContext } from "schema-dts"
@@ -9,6 +10,7 @@ import { JSON_LD_ID } from "@/config/json-ld"
 import { jsonLdBreadcrumbList, JsonLdScript } from "@/lib/json-ld"
 import { absoluteUrl } from "@/lib/utils"
 import { Kbd } from "@/components/ui/kbd"
+import { Tag } from "@/components/ui/tag"
 import { Button } from "@/components/base/ui/button"
 import {
   Tooltip,
@@ -19,6 +21,7 @@ import { Prose } from "@/components/base/ui/typography"
 import { MDX } from "@/components/mdx"
 import { TOCInline } from "@/components/toc-inline"
 import { TOCMinimap } from "@/components/toc-minimap"
+import { PostSeriesNav } from "@/features/blog/components/post-series-nav"
 import { DocKeyboardShortcuts } from "@/features/doc/components/doc-keyboard-shortcuts"
 import {
   DocContainer,
@@ -257,12 +260,49 @@ export default async function Page({ params }: PageProps<"/blog/[slug]">) {
           >
             {doc.metadata.title}
           </h1>
+
+          <div className="screen-line-bottom flex flex-col gap-3 px-4 py-3">
+            <div className="flex items-center gap-2 text-sm">
+              {doc.metadata.project && (
+                <>
+                  <span className="font-semibold">{doc.metadata.project}</span>
+                  <span className="text-muted-foreground" aria-hidden>
+                    ·
+                  </span>
+                </>
+              )}
+              <dl>
+                <dt className="sr-only">Published on</dt>
+                <dd className="text-muted-foreground">
+                  <time
+                    dateTime={new Date(doc.metadata.createdAt).toISOString()}
+                  >
+                    {format(new Date(doc.metadata.createdAt), "yyyy.MM.dd")}
+                  </time>
+                </dd>
+              </dl>
+            </div>
+
+            {doc.metadata.tags && doc.metadata.tags.length > 0 && (
+              <ul className="flex flex-wrap gap-1.5">
+                {doc.metadata.tags.map((tag) => (
+                  <li key={tag} className="flex">
+                    <Tag>{tag}</Tag>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
         </DocContainer>
 
         <DocGrid>
           <DocLeftCol />
 
           <DocContentCol>
+            <div className="px-4 pt-8 empty:hidden">
+              <PostSeriesNav current={doc} posts={allDocs} />
+            </div>
+
             <Prose className="px-(--page-padding) pt-8 [--page-padding:--spacing(4)]">
               <p className="text-muted-foreground">
                 {doc.metadata.description}
