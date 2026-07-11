@@ -13,10 +13,19 @@ export type DocMetadata = {
    */
   category?: string
   /**
-   * Related project name (e.g. "krdscn/ui"). Rendered as a badge in post
-   * lists so posts can be grouped by project at a glance.
+   * Related project name (e.g. "krdscn/ui"). Rendered as a series label in
+   * post lists so posts can be grouped by project at a glance.
    */
   project?: string
+  /**
+   * Order within the project series (e.g. 3 renders as "krdscn/ui #3").
+   * Only meaningful together with `project`.
+   */
+  projectOrder?: number
+  /**
+   * Topic tags rendered as chips in post lists and matched by search.
+   */
+  tags?: string[]
   /**
    * Flag to show a "New" badge/highlight in the UI.
    */

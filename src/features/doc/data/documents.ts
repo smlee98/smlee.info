@@ -59,10 +59,13 @@ export const getAllDocs = cache(() => {
       if (a.metadata.pinned && !b.metadata.pinned) return -1
       if (!a.metadata.pinned && b.metadata.pinned) return 1
 
-      return (
+      const dateDiff =
         new Date(b.metadata.createdAt).getTime() -
         new Date(a.metadata.createdAt).getTime()
-      )
+      if (dateDiff !== 0) return dateDiff
+
+      // Same-day posts fall back to series order (latest installment first).
+      return (b.metadata.projectOrder ?? 0) - (a.metadata.projectOrder ?? 0)
     }
   )
 })

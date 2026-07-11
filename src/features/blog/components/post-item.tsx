@@ -18,6 +18,7 @@ export function PostItem({
   imageLoading?: ImageProps["loading"]
 }) {
   const Heading = headingAs ?? "h2"
+  const { project, projectOrder, tags } = post.metadata
 
   return (
     <div className="group/post relative flex h-full flex-col gap-2 p-2 transition-[background-color] ease-out hover:bg-accent-muted">
@@ -37,7 +38,14 @@ export function PostItem({
         </div>
       )}
 
-      <div className="flex flex-col gap-1 p-2">
+      <div className="flex flex-col gap-1.5 p-2">
+        {project && (
+          <p className="text-sm font-medium text-info">
+            {project}
+            {projectOrder != null && ` #${projectOrder}`}
+          </p>
+        )}
+
         <Heading className="text-lg leading-snug font-medium text-balance">
           <Link href={`/blog/${post.slug}`}>
             <span className="absolute inset-0" aria-hidden />
@@ -53,13 +61,28 @@ export function PostItem({
           )}
         </Heading>
 
-        <dl>
+        {post.metadata.description && (
+          <p className="text-sm text-muted-foreground">
+            {post.metadata.description}
+          </p>
+        )}
+
+        {tags && tags.length > 0 && (
+          <ul className="flex flex-wrap gap-1.5 pt-1">
+            {tags.map((tag) => (
+              <li key={tag} className="flex">
+                <Tag>{tag}</Tag>
+              </li>
+            ))}
+          </ul>
+        )}
+
+        <dl className="pt-1">
           <dt className="sr-only">Published on</dt>
-          <dd className="flex items-center gap-2 text-sm text-muted-foreground">
+          <dd className="text-sm text-muted-foreground">
             <time dateTime={new Date(post.metadata.createdAt).toISOString()}>
               {format(new Date(post.metadata.createdAt), "yyyy.MM.dd")}
             </time>
-            {post.metadata.project && <Tag>{post.metadata.project}</Tag>}
           </dd>
         </dl>
       </div>

@@ -8,11 +8,13 @@ const matchesQuery = (post: Doc, normalizedQuery: string) => {
   const normalizedTitle = normalize(post.metadata.title)
   const normalizedDescription = normalize(post.metadata.description)
   const normalizedProject = normalize(post.metadata.project ?? "")
+  const normalizedTags = (post.metadata.tags ?? []).map(normalize)
 
   return (
     normalizedTitle.includes(normalizedQuery) ||
     normalizedDescription.includes(normalizedQuery) ||
-    normalizedProject.includes(normalizedQuery)
+    normalizedProject.includes(normalizedQuery) ||
+    normalizedTags.some((tag) => tag.includes(normalizedQuery))
   )
 }
 
