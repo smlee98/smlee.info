@@ -1,0 +1,87 @@
+---
+title: Playwright로 공식 KRDS Storybook과 나란히 검증하기
+description: KRDS를 구현했다는 말을 증명하기 위해 만든 두 개의 시각 검증 도구 — 공식 Storybook 대조 캡처와 다크 모드 픽셀 비교를 정리합니다.
+createdAt: 2026-07-11
+updatedAt: 2026-07-11
+project: krdscn/ui
+projectOrder: 7
+tags:
+  - Playwright
+  - 시각 검증
+  - pixelmatch
+  - KRDS
+---
+
+[krdscn/ui](https://krdscn-ui.smlee.info) 시리즈 마지막 글입니다. "KRDS를 구현했다"는 주장은 검증이 따라야 합니다. 기준은 명확합니다 — [공식 KRDS Storybook](https://www.krds.go.kr/storybook/react/)이 있으니까요. 문제는 "어떻게 체계적으로 비교하느냐"였고, 답은 목적이 다른 도구 두 개였습니다.
+
+## 도구 1: 공식 Storybook 대조 캡처
+
+`visual-diff-vs-storybook.mjs`는 Playwright로 두 곳을 캡처합니다 — 로컬 카탈로그와 공식 Storybook. Storybook은 UI 셸을 거치지 않고 story를 iframe URL로 직접 로드합니다.
+
+```js title="scripts/krds/visual-diff-vs-storybook.mjs"
+const STORYBOOK_BASE = "https://www.krds.go.kr/storybook/react"
+
+async function captureStorybookStory(page, storyId) {
+  const url = `${STORYBOOK_BASE}/iframe.html?id=${storyId}&viewMode=story`
+  await page.goto(url, { waitUntil: "networkidle" })
+  // #storybook-root 영역만 crop
+}
+```
+
+래퍼 이름과 공식 story ID(`components-button--primary` 같은)를 잇는 매핑 약 45개를 유지하고, 컴포넌트마다 로컬 캡처·공식 캡처·좌우 합성 이미지 3장과 마크다운 보고서를 생성합니다.
+
+**중요한 설계 결정: 이 도구는 픽셀 비교를 하지 않습니다.** 우리 카탈로그와 Storybook 캔버스는 레이아웃·스케일·패딩이 달라서 픽셀 대조가 무의미합니다. 대신 나란히 붙인 합성 이미지를 사람이 검수합니다 — 토큰 색상, border-radius, 폰트 weight, 컨트롤의 어포던스처럼 "같은 컴포넌트인가"를 판단하는 항목들이죠. 자동화가 힘을 쓰는 곳은 판정이 아니라 **비교 자료를 만드는 반복 노동**입니다.
+
+## 열림 상태도 자동으로 캡처한다
+
+모달·툴팁·날짜 팝오버는 열어야 보입니다. 매핑에 인터랙션 선언이 붙은 컴포넌트는 트리거를 자동으로 조작한 뒤 캡처합니다.
+
+```js
+if (interaction.kind === "click") await trigger.click()
+else if (interaction.kind === "hover") await trigger.hover()
+await page.waitForTimeout(700)
+const png = PNG.sync.read(await page.screenshot()) // 뷰포트 캡처
+await page.keyboard.press("Escape") // 다음 캡처 오염 방지
+```
+
+디테일 두 가지. 오버레이는 portal로 document 레벨에 렌더되므로 fullPage가 아니라 **뷰포트** 스크린샷을 써야 잡히고, 캡처 후 Escape로 닫아야 다음 컴포넌트 캡처가 오염되지 않습니다. 이런 건 전부 한 번씩 데인 뒤에 코드에 남은 흔적입니다.
+
+## 도구 2: 다크 모드 픽셀 비교
+
+`visual-diff-per-component.mjs`는 성격이 다릅니다. 공식과 비교하는 게 아니라, **같은 DOM을 라이트/다크 테마로 두 번 캡처해서 pixelmatch로 대조**합니다. 목적은 다크 모드 색상 누수 탐지 — 시맨틱 토큰을 빼먹고 hex를 하드코딩한 곳은 테마를 바꿔도 색이 안 변하니, 두 캡처의 차이 패턴에서 드러납니다.
+
+여기는 판정이 정량적입니다.
+
+```js
+const verdict =
+  r.ratio > 0.05
+    ? "🚨 LEAK SUSPECTED"
+    : r.ratio > 0.01
+      ? "⚠️ INVESTIGATE"
+      : r.ratio > 0.001
+        ? "✓ noise"
+        : "✓ clean"
+```
+
+경험적으로 실제 토큰 누수는 불일치 5%를 넘고, OS 폰트 렌더링 노이즈는 1% 아래입니다. 보고서는 불일치 밀도 내림차순으로 정렬돼서 제일 의심스러운 컴포넌트부터 보게 됩니다.
+
+## 도구가 실제로 잡은 것들
+
+이 파이프라인은 장식이 아닙니다. 커밋 히스토리에 증거가 있습니다.
+
+```text
+fix(align): KRDS Checkbox·Radio with-description 구조 개편 — KRDS 공식 구조 이식
+fix(align): KRDS Checkbox·Radio 단일 라벨 정렬 — shadcn 조건부 패턴 이식
+fix(align): 아이콘+한글텍스트 정렬 nudge 일괄 제거
+```
+
+비교 인프라를 먼저 만들고(`feat(catalog): rebuild comparison grid for visual-diff infra`), 그 도구로 공식과의 불일치를 발견하고, 공식 구조를 이식해 고치는 워크플로가 반복됐습니다. Checkbox 라벨 정렬처럼 눈으로는 "대충 비슷한" 것들이 나란히 놓으면 바로 드러납니다.
+
+## 정리
+
+- 공식 대조는 **합성 캡처 + 육안 검수** — 레이아웃이 다른 두 화면에 픽셀 비교를 강요하지 않는다
+- 다크 모드는 **pixelmatch + 정량 판정** — 같은 DOM이니 픽셀 비교가 유효하다
+- 열림 상태는 자동 인터랙션으로 캡처, portal은 뷰포트 스크린샷으로
+- 도구의 가치는 커밋 히스토리가 증명 — 발견하고, 이식하고, 고쳤다
+
+이것으로 krdscn/ui 시리즈를 마칩니다. 전체 컴포넌트와 예제는 [krdscn-ui.smlee.info](https://krdscn-ui.smlee.info)에서, 소스와 이슈는 [GitHub](https://github.com/smlee98/krdscn-ui)에서 볼 수 있습니다.

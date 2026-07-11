@@ -1,0 +1,99 @@
+---
+title: KRDS 폼 컴포넌트와 접근성
+description: krdscn/ui 폼 컴포넌트의 접근성 설계를 정리합니다. 네이티브와 Radix의 역할 분담, 메시지 시스템 하나로 aria-invalid까지 자동화한 이야기.
+createdAt: 2026-07-11
+updatedAt: 2026-07-11
+project: krdscn/ui
+projectOrder: 5
+tags:
+  - KRDS
+  - 폼
+  - 웹접근성
+  - Radix UI
+---
+
+[krdscn/ui](https://krdscn-ui.smlee.info) 시리즈, 이번에는 폼입니다. 공공 웹의 폼은 접근성 요구가 가장 촘촘한 영역이라, 컴포넌트가 접근성을 "기본값"으로 갖추도록 설계하는 게 목표였습니다.
+
+## 네이티브와 Radix의 역할 분담
+
+폼 컴포넌트의 기반은 둘로 나뉩니다.
+
+- **입력 계열은 네이티브** — TextInput, Textarea, FileUpload는 순수 `<input>`·`<textarea>`입니다. 브라우저가 이미 잘하는 걸 굳이 대체하지 않습니다.
+- **선택 계열은 Radix** — Checkbox, Radio, Select, ToggleSwitch는 Radix Primitives 기반입니다. 커스텀 스타일링이 필요한 순간 네이티브의 접근성을 잃기 쉬운 컴포넌트들이라, 키보드 인터랙션·포커스 관리·ARIA를 Radix에 위임합니다.
+
+예를 들어 Checkbox의 Radix Root는 `<button role="checkbox">`로 렌더링되고, 폼 제출 통합은 Radix가 내부에 만들어주는 hidden input이 처리합니다. 스타일은 완전히 통제하면서 접근성과 폼 호환성은 공짜로 얻는 구조입니다.
+
+## 메시지 시스템 하나로 접근성 자동화
+
+접근성 설계의 중심은 `field-message.tsx`입니다. 힌트·에러·성공·안내 4종 메시지와 우선순위 렌더 헬퍼를 제공합니다.
+
+```tsx title="components/ui/krds/(input)/field-message.tsx"
+function renderFieldMessage(id, { error, success, information, hint }) {
+  const messageId = `${id}-message`
+  if (error != null && error !== false)
+    return <FieldError id={messageId}>{error}</FieldError>
+  if (success != null && success !== false)
+    return <FieldSuccess id={messageId}>{success}</FieldSuccess>
+  // information → hint 순으로 폴백
+}
+```
+
+이 헬퍼를 TextInput·Textarea·Select·DateInput이 공유하고, 각 컴포넌트는 3단 패턴을 따릅니다: 메시지를 렌더하고 → 메시지 id를 `aria-describedby`에 병합하고 → 에러가 있으면 `aria-invalid`를 자동으로 세웁니다.
+
+```tsx title="components/ui/krds/(input)/text-input.tsx"
+const message = renderFieldMessage(id, { error, success, information, hint })
+const describedBy = message
+  ? [ariaDescribedby, `${id}-message`].filter(Boolean).join(" ")
+  : ariaDescribedby
+const resolvedInvalid =
+  ariaInvalid ?? (error != null && error !== false ? true : undefined)
+```
+
+사용하는 쪽에서는 `error="이메일 형식이 아닙니다"` 한 줄만 넘기면 됩니다. 에러 텍스트가 `role="alert"`로 렌더되어 스크린리더가 즉시 낭독하고, 입력 요소에는 `aria-invalid`와 `aria-describedby`가 자동으로 연결됩니다.
+
+## ARIA가 곧 시각 상태다
+
+재미있는 디테일 하나. 에러 시의 빨간 테두리는 별도 상태 프롭이 아니라 **ARIA 속성 셀렉터**로 걸려 있습니다.
+
+```tsx
+// TextInput 래퍼
+"has-[input[aria-invalid=true]]:border-krds-danger-50"
+
+// Select 트리거
+"aria-invalid:border-krds-danger-50"
+```
+
+접근성 속성이 시각 상태의 단일 소스입니다. "화면은 빨간데 스크린리더는 모르는" 불일치가 구조적으로 불가능해집니다. Textarea는 한 발 더 나가서, 글자 수 제한을 초과하면 그것도 `aria-invalid`에 반영합니다.
+
+```tsx title="components/ui/krds/(input)/textarea.tsx"
+const isOverLimit = countTotal !== undefined && currentLength > countTotal
+const invalid = ariaInvalid ?? (hasError || isOverLimit || undefined)
+```
+
+## KRDS 사양의 흔적들
+
+KRDS 공식 사양은 코드 곳곳에 반영돼 있습니다.
+
+- 에러 메시지는 항상 컨트롤 **아래** 인라인 렌더. Textarea는 하단에 메시지(왼쪽)와 글자 수 카운터(오른쪽)를 한 줄로 배치하는 KRDS 레이아웃을 따릅니다.
+- 크기 값은 KRDS SCSS 원본을 주석으로 인용하며 맞췄습니다 — 입력 radius small/medium 6px·large 8px, 칩 높이 40/48/56px.
+- 한국어 UI 문구가 내장돼 있습니다 — "내용 삭제", "비밀번호 보기" 같은 aria-label, 파일 용량·형식 오류 메시지까지.
+
+## DateInput과 FileUpload
+
+**DateInput**은 Radix Popover + 달력(react-day-picker v10, shadcn Calendar 래핑) 조합입니다. 트리거는 읽기 전용 버튼으로, 직접 타이핑을 의도적으로 막고 값은 달력에서만 설정하게 했습니다 — 자유 입력의 형식 오류를 원천 차단하는 선택입니다. 년/월/일을 분할 입력하는 DateInputUnit, 기간 입력용 DateInputPeriodUnit 변형도 있습니다.
+
+**FileUpload**는 드래그앤드롭과 버튼 선택을 모두 지원하고, ready → uploading → completed → error 상태 머신으로 동작합니다. 용량(기본 20MB)·확장자 검증이 내장돼 있고, 업로드 중에는 `role="status"` 스피너로 진행 상태를 보조기술에 알립니다. 실제 업로드는 `onFileUpload` 비동기 콜백으로 위임합니다.
+
+## 솔직한 한계
+
+- KRDS 래퍼는 react-hook-form에 의존하지 않습니다. 자체 controlled/uncontrolled + 메시지 시스템으로 처리하고, RHF와 함께 쓰려면 소비자가 Controller로 감싸면 됩니다.
+- "필수 항목" 표기(별표 + aria-required)를 자동화하는 전용 프롭은 아직 없습니다. 네이티브 `required`는 통과되지만 KRDS의 필수 표기 규칙을 컴포넌트가 강제하지는 않아서, 개선 여지로 남겨둔 부분입니다.
+
+## 정리
+
+- 입력은 네이티브, 선택은 Radix — 각자 잘하는 것에 위임
+- 메시지 시스템 하나로 `role="alert"`·`aria-describedby`·`aria-invalid` 자동 연결
+- ARIA 속성을 시각 상태의 단일 소스로 사용
+- KRDS의 레이아웃·크기·문구 규칙을 코드 레벨에 반영
+
+다음 글에서는 41개 컴포넌트와 199개 예제를 자동으로 문서화하는 파이프라인을 다룹니다.

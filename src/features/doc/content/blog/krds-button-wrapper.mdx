@@ -1,0 +1,109 @@
+---
+title: KRDS Button 딥다이브 — 래퍼 전략의 유일한 예외
+description: krdscn/ui의 Button은 shadcn을 감싸지 않고 native button + cva로 직접 구현했습니다. 왜 예외가 필요했는지, KRDS Button 사양을 어떻게 코드에 옮겼는지 정리합니다.
+createdAt: 2026-07-11
+updatedAt: 2026-07-11
+project: krdscn/ui
+projectOrder: 4
+tags:
+  - KRDS
+  - Button
+  - cva
+  - Figma
+---
+
+[지난 글](/blog/krdscn-ui-wrapper-strategy)에서 "shadcn base를 감싼다"는 원칙과 함께 예외를 예고했습니다. 그 예외가 Button입니다. [krdscn/ui](https://krdscn-ui.smlee.info)의 42개 래퍼 중 유일하게 shadcn Button을 import하지 않고 native `<button>` + cva로 직접 구현했습니다.
+
+## 왜 감싸지 않았나
+
+이유는 설계 문서에 그대로 남겨뒀습니다.
+
+> variant×color 2차원 매트릭스를 다루려면 cva를 완전히 통제해야 하고, shadcn Button을 감싸면 그쪽의 `asChild`/Slot 표면이 새어 나온다. **`!important` 오버라이드가 2개를 넘는 래퍼는 이 패턴(native + cva)으로 승격한다.**
+
+감싸기의 비용이 임계점을 넘는 순간이 있습니다. base의 스타일을 지우려고 `!important`를 쌓기 시작하면, 그건 이미 감싸는 게 아니라 싸우는 겁니다. Button은 KRDS 사양의 밀도가 높아 일찌감치 그 임계점을 넘었고, 그래서 "승격 기준"을 아예 규칙으로 문서화했습니다.
+
+## Figma 노드가 주석에 박혀 있다
+
+Button 파일 상단에는 KRDS 공식 Figma의 노드 번호와 정확한 hex, 상태 전이가 각인돼 있습니다.
+
+```tsx title="components/ui/krds/(action)/button.tsx"
+/**
+ * KRDS Button — Figma nodes 305:2236 (button) + 300:26102 (button_text)
+ *   - default   : 파란 fill #256ef4 (hover #0b50d0 → pressed #083891)
+ *   - secondary : 옅은 파랑 fill #ecf2fe + 파란 테두리/텍스트
+ *   - tertiary  : 투명 fill + 회색 테두리 [KRDS extension]
+ *   - text      : button_text — 투명 fill, hover/pressed만 회색 surface
+ */
+```
+
+"디자인 시스템 구현"에서 제일 어려운 건 코드가 아니라 **추적 가능성**입니다. 6개월 뒤 "이 색 왜 이래?"라는 질문에 Figma 노드 번호로 답할 수 있느냐의 문제죠.
+
+## variant 7종 — 두 세계의 합집합
+
+```text
+default | secondary | tertiary | text   ← KRDS 사양
+outline | ghost | link                  ← shadcn 호환
+```
+
+KRDS 고유 variant(`tertiary`, `text`)와 shadcn 호환 variant(`outline`, `ghost`)가 공존합니다. shadcn의 `destructive`는 KRDS에 대응 개념이 없어 뺐습니다. 재미있는 건 KRDS가 Figma에서 일반 `button`과 `button_text`를 **별도 컴포넌트**로 관리한다는 점인데, 코드에서는 compoundVariants로 한 cva 안에 통합했습니다 — fill 계열은 사이즈별 최소 너비(`min-w-[78px]`)와 가로 패딩을 갖고, text 계열은 button_text 사양의 컴팩트한 높이(20~40px)에 `px-0.5`로 좁힙니다.
+
+```tsx
+variants: {
+  variant: {
+    default:
+      "border border-krds-border-primary bg-krds-primary-50 text-white " +
+      "hover:bg-krds-primary-60 active:bg-krds-primary-70",
+    tertiary:
+      "border border-krds-border-dark bg-transparent text-krds-foreground",
+  },
+  size: {
+    xs: "h-8 rounded-[4px] text-krds-body-sm",
+    default: "h-12 rounded-[6px] text-krds-body-md",
+    xl: "h-16 rounded-[8px] text-krds-body-lg",
+  },
+}
+```
+
+hover → active가 primary 50 → 60 → 70으로 팔레트 단계를 타고 내려가는 것, radius가 사이즈별로 4/6/8px 차등인 것 모두 KRDS 사양 그대로입니다.
+
+## shadcn Button과 나란히 놓고 보면
+
+|             | shadcn          | KRDS                                 |
+| ----------- | --------------- | ------------------------------------ |
+| 기본 높이   | h-9 (36px)      | **h-12 (48px)**                      |
+| 최대 사이즈 | lg (40px)       | **xl (64px)**                        |
+| 최소 너비   | 없음            | fill 계열 60~98px                    |
+| 타이포      | text-sm, medium | **text-krds-body-md (17px)**, normal |
+| radius      | 전부 rounded-md | 사이즈별 4~8px                       |
+| 포커스      | ring 3px        | **krds-focus-ring (이중 링)**        |
+
+일관된 방향이 보입니다: **전부 더 큽니다.** KRDS는 공공 서비스의 넓은 사용자층을 전제하니 터치 타깃과 글자가 크고, 최소 너비로 클릭 영역을 보장합니다. shadcn의 기본값을 조금씩 키워서 될 일이 아니라, 애초에 다른 좌표계였습니다 — 직접 구현을 택한 또 하나의 이유입니다.
+
+## 예제도 디스패처를 통한다
+
+카탈로그의 Button 예제 7종(Primary/Secondary/Tertiary/Text/Sizes/Icon/Disabled)은 전부 `ui/krds`가 아니라 `ui/dynamic`에서 import합니다.
+
+```tsx title="components/examples/button/ButtonSizes.tsx"
+import { Button } from "@/components/ui/dynamic/button"
+
+export default function ButtonSizes() {
+  return (
+    <div className="flex flex-wrap items-end gap-3">
+      <Button size="xs">XSmall</Button>
+      <Button size="default">Medium</Button>
+      <Button size="xl">XLarge</Button>
+    </div>
+  )
+}
+```
+
+예제 코드가 그대로 "shadcn 룩 ↔ KRDS 룩" 토글의 대상이 됩니다. 아이콘 버튼 예제는 `aria-label="삭제"`를 반드시 달아서, 예제가 접근성 모범 사례를 겸하게 했습니다.
+
+## 정리
+
+- 감싸기의 비용이 임계점을 넘으면 승격 — `!important` 2개가 기준선
+- Figma 노드·hex·상태 전이를 주석으로 각인해 추적 가능성 확보
+- KRDS 고유 variant와 shadcn 호환 variant의 합집합, destructive는 제외
+- KRDS Button은 shadcn보다 모든 치수가 큰 별도 좌표계
+
+다음 글은 폼입니다 — 네이티브와 Radix의 역할 분담, 그리고 메시지 시스템 하나로 접근성을 자동화한 이야기.
