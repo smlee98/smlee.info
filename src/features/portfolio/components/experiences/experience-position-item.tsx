@@ -147,7 +147,8 @@ function formatDuration(start: string, end?: string): string {
 
   // +1 to count both the start and end months inclusively.
   const totalMonths = differenceInMonths(endDate, startDate) + 1
-  if (totalMonths <= 0) {
+  // NaN from an unparseable period must not leak into the UI.
+  if (!Number.isFinite(totalMonths) || totalMonths <= 0) {
     return ""
   }
 
@@ -164,12 +165,13 @@ function formatDuration(start: string, end?: string): string {
 }
 
 function parsePeriodDate(str: string, fallbackMonth: "first" | "last"): Date {
+  // Periods are written as "yyyy.MM" (e.g. "2020.03") or year-only "yyyy".
   if (str.includes(".")) {
-    return parse(str, "MM.yyyy", new Date())
+    return parse(str, "yyyy.MM", new Date())
   }
   return parse(
-    `${fallbackMonth === "last" ? "12" : "01"}.${str}`,
-    "MM.yyyy",
+    `${str}.${fallbackMonth === "last" ? "12" : "01"}`,
+    "yyyy.MM",
     new Date()
   )
 }
