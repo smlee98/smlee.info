@@ -11,27 +11,27 @@ export const EXPERIENCES: Experience[] = [
     positions: [
       {
         id: "1",
-        title: "대리 / Fullstack Developer",
+        title: "대리 / Frontend Engineer",
         employmentPeriod: {
           start: "2020.03",
         },
         employmentType: "Full-time",
         icon: <CodeXmlIcon />,
-        description: `솔루션 개발을 주로 담당하며, 풀스택 개발과 AI 에이전트 솔루션 개발을 수행하고 있습니다. 대기업/공공기관 SI 프로젝트에도 다수 투입되었습니다.
+        description: `프론트엔드와 디자인 시스템을 중심으로 솔루션 개발을 담당하고 있어요. 지금은 AI 에이전트 솔루션을 만들고 있고, 대기업/공공기관 SI 프로젝트에도 다수 투입됐어요.
 
+- 사내 디자인 시스템 구축 - 공통 컴포넌트와 디자인 토큰 설계
 - AI 에이전트 솔루션 설계 및 개발 (진행 중)
 - 농협중앙회, 신한카드, 우정사업본부, 한국방송통신전파진흥원 - 프론트엔드 개발
 - 수자원공사, 지역난방공사 - 풀스택 개발
-- 사내 디자인 시스템 구축
 - 회사 홈페이지 개발`,
         skills: [
           "React",
           "Next.js",
           "TypeScript",
+          "Design System",
           "Node.js",
           "Fastify",
           "AI Agent",
-          "Design System",
         ],
         isExpanded: true,
       },
