@@ -21,8 +21,8 @@ export type Project = {
     /** End date; leave undefined for "Present". */
     end?: string
   }
-  /** Public URL (site, repository, demo, or video). */
-  link: string
+  /** Public URL (site, repository, demo, or video). Omit to hide the link button. */
+  link?: string
   /** GitHub repository URL; renders a GitHub icon button when set. */
   github?: string
   /** Tags/technologies for chips or filtering. */

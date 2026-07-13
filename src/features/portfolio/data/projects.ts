@@ -44,7 +44,6 @@ export const WORK_PROJECTS: Project[] = [
     period: {
       start: "2026.06",
     },
-    link: "https://www.gridone.co.kr",
     skills: [
       "Next.js",
       "React",
@@ -67,7 +66,6 @@ export const WORK_PROJECTS: Project[] = [
       start: "2025.05",
       end: "2025.11",
     },
-    link: "https://www.gridone.co.kr",
     skills: [
       "Next.js",
       "React",
@@ -88,7 +86,6 @@ export const WORK_PROJECTS: Project[] = [
       start: "2024.07",
       end: "2025.02",
     },
-    link: "https://www.gridone.co.kr",
     skills: [
       "Next.js",
       "React",
@@ -149,7 +146,6 @@ export const WORK_PROJECTS: Project[] = [
       start: "2022.07",
       end: "2022.09",
     },
-    link: "https://www.gridone.co.kr",
     skills: ["Pug", "SCSS", "Bootstrap", "Parcel", "jQuery", "Chart.js"],
     description:
       "RPA 운영 포털 100여 개 화면의 퍼블리싱을 담당했어요. Pug 템플릿의 믹스인과 상속으로 화면을 컴포넌트화하고, Bootstrap 5를 SCSS로 커스터마이즈해 공통 UI 킷을 만들었어요. 라이트/다크/자동 3단 다크 모드와 차트·간트·캘린더 같은 대시보드형 컴포넌트까지 마크업 단계에서 구현했어요.",
@@ -183,7 +179,6 @@ export const WORK_PROJECTS: Project[] = [
       start: "2021.09",
       end: "2022.01",
     },
-    link: "https://www.gridone.co.kr",
     skills: ["HTML", "CSS", "jQuery", "Bootstrap", "Chart.js"],
     description:
       "RPA 관리 포털 88개 화면의 퍼블리싱을 담당했어요. Bootstrap 4와 jQuery 기반으로 대시보드·모니터링·스케줄 간트·게시판 화면을 마크업했고, 공통 내비게이션과 데이터 테이블처럼 반복되는 패턴을 공통 스크립트·스타일로 정리해 화면 간 일관성을 유지했어요.",
