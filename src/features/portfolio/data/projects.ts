@@ -97,7 +97,28 @@ export const WORK_PROJECTS: Project[] = [
     ],
     description:
       "업무 문서를 근거로 답하는 기업용 생성형 AI RAG 서비스의 프론트엔드를 개발했어요. 모노레포에서 챗봇·관리·커뮤니티 앱을 나눠 구성했고, 업무 도메인별 RAG 백엔드를 Vercel AI SDK 커스텀 프로바이더로 추상화해 스트리밍 채팅 UI에 연결했어요. HWP·PDF 뷰어와 문서 전처리 관리 화면 등 문서 중심 기능을 폭넓게 다뤘어요.",
-    previewsPending: 3,
+    previews: [
+      {
+        src: "/images/projects/w-corp-genai-rag/01.webp",
+        alt: "서비스 홈 — 업무 지식 질의 입력과 GPT 서비스존",
+        caption: "서비스 홈",
+      },
+      {
+        src: "/images/projects/w-corp-genai-rag/02.webp",
+        alt: "업무 지식 RAG 챗봇 — 사규·기준 질의와 추천 질문",
+        caption: "업무 지식 RAG 챗봇",
+      },
+      {
+        src: "/images/projects/w-corp-genai-rag/03.webp",
+        alt: "RAG 챗봇 실제 질의응답 — 사규 질문에 대한 문서 기반 답변과 출처",
+        caption: "RAG 질의응답",
+      },
+      {
+        src: "/images/projects/w-corp-genai-rag/04.webp",
+        alt: "보고서 생성 — 원본 데이터 기반 보고서 작성",
+        caption: "보고서 생성",
+      },
+    ],
   },
   {
     id: "gridone-homepage",
