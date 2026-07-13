@@ -56,7 +56,28 @@ export const WORK_PROJECTS: Project[] = [
     ],
     description:
       "여러 AI 서비스를 한곳에 모으는 생성형 AI 플랫폼의 프론트엔드를 개발하고 있어요. 20여 개의 Next.js 앱을 공유 디자인 시스템과 함께 모노레포로 운영하는 마이크로 프론트엔드 구조로, RAG 챗봇·AI 회의록·비주얼 에이전트 빌더 같은 서비스의 화면과 SSE 토큰 스트리밍 채팅 UI를 만들고 있어요.",
-    previewsPending: 3,
+    previews: [
+      {
+        src: "/images/projects/g-corp-genai-platform/01.webp",
+        alt: "서비스 홈 — 카테고리 기반 RAG 검색과 에이전트 팜",
+        caption: "서비스 홈",
+      },
+      {
+        src: "/images/projects/g-corp-genai-platform/02.webp",
+        alt: "에이전트 팜 — 업무 자동화 에이전트 목록",
+        caption: "에이전트 팜",
+      },
+      {
+        src: "/images/projects/g-corp-genai-platform/03.webp",
+        alt: "시스템 대시보드 — CPU·메모리·네트워크 등 자원 모니터링",
+        caption: "시스템 대시보드",
+      },
+      {
+        src: "/images/projects/g-corp-genai-platform/04.webp",
+        alt: "지식 DB — 문서 임베딩·폴더 관리",
+        caption: "지식 DB 관리",
+      },
+    ],
     isExpanded: true,
   },
   {
