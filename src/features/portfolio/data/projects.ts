@@ -77,7 +77,28 @@ export const WORK_PROJECTS: Project[] = [
     ],
     description:
       "사내 맞춤형 생성형 AI 서비스의 프론트엔드를 개발했어요. RAG 챗봇과 문서 분석·보고서 생성 같은 AI 도구, 지식 DB·프롬프트·통계를 다루는 관리자 콘솔을 구현했고, 백엔드 SSE 스트림을 채팅 UI로 이어 붙이는 스트리밍 파이프라인을 만들었어요. 하나의 코드베이스를 내부망/외부망 두 타겟으로 나눠 배포하는 구조가 특징이에요.",
-    previewsPending: 3,
+    previews: [
+      {
+        src: "/images/projects/d-corp-custom-genai/01.webp",
+        alt: "서비스 홈 — 지식 카테고리 기반 RAG 검색과 AI 서비스존",
+        caption: "서비스 홈",
+      },
+      {
+        src: "/images/projects/d-corp-custom-genai/02.webp",
+        alt: "코드 생성 — Python·VBA·Java·C 언어 선택과 요구사항 입력",
+        caption: "코드 생성",
+      },
+      {
+        src: "/images/projects/d-corp-custom-genai/03.webp",
+        alt: "보고서 생성 — 유형 선택과 원문 기반 보고서 작성",
+        caption: "보고서 생성",
+      },
+      {
+        src: "/images/projects/d-corp-custom-genai/04.webp",
+        alt: "요약 — 개조식/서술식 문서 요약",
+        caption: "요약",
+      },
+    ],
   },
   {
     id: "w-corp-genai-rag",
