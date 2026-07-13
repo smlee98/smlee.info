@@ -22,6 +22,10 @@ import { GitHubIcon } from "@/components/icons"
 import { Markdown } from "@/components/markdown"
 
 import type { Project } from "../../types/projects"
+import {
+  ProjectPreviews,
+  ProjectPreviewsPending,
+} from "./project-previews"
 
 export function ProjectItem({
   className,
@@ -136,6 +140,12 @@ export function ProjectItem({
               <Markdown>{project.description}</Markdown>
             </Prose>
           )}
+
+          {project.previews && project.previews.length > 0 ? (
+            <ProjectPreviews previews={project.previews} />
+          ) : project.previewsPending ? (
+            <ProjectPreviewsPending count={project.previewsPending} />
+          ) : null}
 
           {project.skills.length > 0 && (
             <ul className="flex flex-wrap gap-1.5">
