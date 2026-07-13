@@ -109,9 +109,38 @@ export const WORK_PROJECTS: Project[] = [
       start: "2024.03",
     },
     link: "https://www.gridone.co.kr",
-    skills: ["Next.js", "React", "TypeScript"],
-    description: "그리드원 공식 홈페이지를 개발하고 운영하고 있어요.",
-    previewsPending: 3,
+    skills: [
+      "Next.js",
+      "React",
+      "TypeScript",
+      "Tailwind CSS",
+      "Prisma",
+      "Framer Motion",
+    ],
+    description:
+      "그리드원 공식 홈페이지를 개발하고 운영하고 있어요. AI 에이전트·솔루션 소개부터 회사 소개·자료실·문의까지 이어지는 사이트를 Next.js로 만들었고, 콘텐츠를 직접 관리하는 관리자 화면(에디터·게시판)도 함께 구현했어요.",
+    previews: [
+      {
+        src: "/images/projects/gridone-homepage/01.webp",
+        alt: "메인 홈 — AI 에이전트 포지셔닝 히어로와 키워드",
+        caption: "메인 홈",
+      },
+      {
+        src: "/images/projects/gridone-homepage/02.webp",
+        alt: "20년의 기술 적층 — 요소 기술을 쌓아 올린 계단형 그래프",
+        caption: "기술 적층 섹션",
+      },
+      {
+        src: "/images/projects/gridone-homepage/03.webp",
+        alt: "그리드원 솔루션 아키텍처 — AI 에이전트 기반 블록 구성",
+        caption: "솔루션 아키텍처",
+      },
+      {
+        src: "/images/projects/gridone-homepage/04.webp",
+        alt: "AI 에이전트 서비스 GO;DO 소개 페이지",
+        caption: "GO;DO 소개",
+      },
+    ],
   },
   {
     id: "k-life-rpa-portal",
