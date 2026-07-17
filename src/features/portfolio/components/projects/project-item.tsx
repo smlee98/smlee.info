@@ -22,6 +22,10 @@ import { GitHubIcon } from "@/components/icons"
 import { Markdown } from "@/components/markdown"
 
 import type { Project } from "../../types/projects"
+import {
+  ProjectPreviews,
+  ProjectPreviewsPending,
+} from "./project-previews"
 
 export function ProjectItem({
   className,
@@ -103,24 +107,26 @@ export function ProjectItem({
               </Tooltip>
             )}
 
-            <Tooltip>
-              <TooltipTrigger
-                render={
-                  <a
-                    className="relative flex size-6 shrink-0 items-center justify-center text-muted-foreground after:absolute after:-inset-2 hover:text-foreground"
-                    href={addQueryParams(project.link, UTM_PARAMS)}
-                    target="_blank"
-                    rel="noopener"
-                    aria-label="Open project"
-                  >
-                    <LinkIcon className="pointer-events-none size-4" />
-                  </a>
-                }
-              />
-              <TooltipContent>
-                <p>Open project</p>
-              </TooltipContent>
-            </Tooltip>
+            {project.link && (
+              <Tooltip>
+                <TooltipTrigger
+                  render={
+                    <a
+                      className="relative flex size-6 shrink-0 items-center justify-center text-muted-foreground after:absolute after:-inset-2 hover:text-foreground"
+                      href={addQueryParams(project.link, UTM_PARAMS)}
+                      target="_blank"
+                      rel="noopener"
+                      aria-label="Open project"
+                    >
+                      <LinkIcon className="pointer-events-none size-4" />
+                    </a>
+                  }
+                />
+                <TooltipContent>
+                  <p>Open project</p>
+                </TooltipContent>
+              </Tooltip>
+            )}
 
             <div className="shrink-0 text-muted-foreground [&_svg]:size-4">
               <CollapsibleChevronsUpDownIcon duration={0.15} />
@@ -136,6 +142,12 @@ export function ProjectItem({
               <Markdown>{project.description}</Markdown>
             </Prose>
           )}
+
+          {project.previews && project.previews.length > 0 ? (
+            <ProjectPreviews previews={project.previews} />
+          ) : project.previewsPending ? (
+            <ProjectPreviewsPending count={project.previewsPending} />
+          ) : null}
 
           {project.skills.length > 0 && (
             <ul className="flex flex-wrap gap-1.5">
