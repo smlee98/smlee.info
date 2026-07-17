@@ -12,12 +12,12 @@ export type CopyButtonProps = Omit<
 
 export type HapticProps = {
   /**
-   * Trigger haptic feedback on mobile devices.
-   * Uses Vibration API on Android/modern browsers, and iOS checkbox trick on iOS.
+   * 모바일 기기에서 햅틱 피드백을 일으켜요.
+   * Android와 최신 브라우저에서는 Vibration API를, iOS에서는 체크박스 트릭을 사용해요.
    *
-   * @param pattern - Vibration duration (ms) or pattern.
-   * Custom patterns only work on Android devices. iOS uses fixed feedback.
-   * See [Vibration API](https://developer.mozilla.org/docs/Web/API/Vibration_API)
+   * @param pattern - 진동 시간(ms) 또는 진동 패턴.
+   * 커스텀 패턴은 Android에서만 동작하고, iOS는 고정된 피드백을 사용해요.
+   * [Vibration API](https://developer.mozilla.org/docs/Web/API/Vibration_API) 참고
    *
    * @example
    *

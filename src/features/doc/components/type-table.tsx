@@ -70,8 +70,8 @@ export function TypeTable({
       {...props}
     >
       <div className="not-prose flex items-center px-3 py-2 font-medium text-muted-foreground">
-        <p className="w-1/4">Prop</p>
-        <p className="@max-xl:hidden">Type</p>
+        <p className="w-1/4">속성</p>
+        <p className="@max-xl:hidden">타입</p>
       </div>
 
       {Object.entries(type).map(([key, value]) => (
@@ -144,14 +144,14 @@ function Item({
 
           {typeDescription != null && (
             <>
-              <p className="not-prose pr-3 text-muted-foreground">Type</p>
+              <p className="not-prose pr-3 text-muted-foreground">타입</p>
               <p className="not-prose my-auto">{typeDescription}</p>
             </>
           )}
 
           {defaultValue != null && (
             <>
-              <p className="not-prose pr-3 text-muted-foreground">Default</p>
+              <p className="not-prose pr-3 text-muted-foreground">기본값</p>
               <p className="not-prose my-auto">{defaultValue}</p>
             </>
           )}

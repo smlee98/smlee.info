@@ -1,6 +1,6 @@
 ---
 title: Middle Truncation
-description: Truncate text in the middle while preserving start and end.
+description: 텍스트의 처음과 끝을 남기고 가운데를 줄임표로 처리해요.
 createdAt: 2026-04-01
 updatedAt: 2026-04-01
 ---
@@ -10,13 +10,13 @@ updatedAt: 2026-04-01
   openInV0Url="https://smlee.info/r/middle-truncation.json"
 />
 
-## Features
+## 특징
 
-- Three truncation strategies: fixed end, flexible with minimum, or even split.
-- Pixel-accurate measurement based on actual rendered text width.
-- Automatically recalculates when container resizes.
+- 세 가지 잘라내기 전략을 지원해요: 끝 글자 수 고정, 최소 글자 수 보장, 균등 분할.
+- 실제로 렌더링된 텍스트 너비를 기준으로 픽셀 단위까지 정확하게 계산해요.
+- 컨테이너 크기가 바뀌면 자동으로 다시 계산해요.
 
-## Installation
+## 설치
 
 <CodeTabs>
 
@@ -34,13 +34,13 @@ npx shadcn@latest add @smlee/middle-truncation
 
 <Steps>
 
-<Step>Install the following dependencies</Step>
+<Step>다음 의존성을 설치하세요</Step>
 
 ```bash
 npm install clsx tailwind-merge
 ```
 
-<Step>Add a cn helper</Step>
+<Step>cn 헬퍼를 추가하세요</Step>
 
 <ComponentSource
   src="src/registry/lib/utils.ts"
@@ -48,14 +48,14 @@ npm install clsx tailwind-merge
   collapsible="false"
 />
 
-<Step>Copy and paste the following code into your project</Step>
+<Step>아래 코드를 프로젝트에 복사해 붙여넣으세요</Step>
 
 <ComponentSource
   name="middle-truncation"
   title="components/middle-truncation.tsx"
 />
 
-<Step>Update the import paths to match your project setup</Step>
+<Step>import 경로를 프로젝트 구조에 맞게 수정하세요</Step>
 
 </Steps>
 
@@ -63,7 +63,7 @@ npm install clsx tailwind-merge
 
 </CodeTabs>
 
-## Usage
+## 사용법
 
 ```tsx
 import { MiddleTruncation } from "@/components/middle-truncation"
@@ -75,7 +75,7 @@ import { MiddleTruncation } from "@/components/middle-truncation"
 </MiddleTruncation>
 ```
 
-## API reference
+## API 레퍼런스
 
 ### MiddleTruncation
 
@@ -84,11 +84,11 @@ import { MiddleTruncation } from "@/components/middle-truncation"
   name="MiddleTruncationProps"
 />
 
-## Examples
+## 예시
 
-### Fixed end
+### 끝 글자 수 고정
 
-Always preserve exactly a fixed number of characters at the end.
+끝에서 지정한 글자 수를 항상 그대로 남겨요.
 
 ```tsx
 <MiddleTruncation end={4}>
@@ -96,9 +96,9 @@ Always preserve exactly a fixed number of characters at the end.
 </MiddleTruncation>
 ```
 
-### Flexible with minimum
+### 최소 글자 수 보장
 
-Split text evenly, but ensure at least a minimum number of characters at the end.
+텍스트를 균등하게 나누되, 끝에 최소한의 글자 수는 보장해요.
 
 ```tsx
 <MiddleTruncation minEnd={12}>
@@ -106,9 +106,9 @@ Split text evenly, but ensure at least a minimum number of characters at the end
 </MiddleTruncation>
 ```
 
-### Even split
+### 균등 분할
 
-Split text evenly in the middle when no constraints are provided.
+아무 조건도 주지 않으면 가운데를 기준으로 균등하게 나눠요.
 
 ```tsx
 <MiddleTruncation>
@@ -116,6 +116,6 @@ Split text evenly in the middle when no constraints are provided.
 </MiddleTruncation>
 ```
 
-## Credits
+## 크레딧
 
 - [@pqoqubbw](https://x.com/pqoqubbw/status/2039034994581000700)

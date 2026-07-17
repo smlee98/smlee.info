@@ -1,6 +1,6 @@
 ---
 title: GitHub Contributions
-description: Visualize year-long GitHub contribution activity with daily counts, tooltips, and a profile link.
+description: 지난 1년의 GitHub 기여 활동을 일별 그래프와 툴팁으로 보여줘요.
 createdAt: 2026-04-18
 updatedAt: 2026-05-08
 ---
@@ -11,13 +11,13 @@ updatedAt: 2026-05-08
   openInV0Url="https://smlee.info/r/github-contributions.json"
 />
 
-## Features
+## 특징
 
-- Built on Kibo UI [Contribution Graph](https://www.kibo-ui.com/components/contribution-graph) for the calendar grid, legend, and yearly total.
-- Loads contribution data from Jonathan Gruber's [GitHub Contributions API](https://github.com/grubersjoe/github-contributions-api).
-- Uses Next.js `unstable_cache` with a one-day revalidation window, then passes a `Promise` into the client and resolves it with React `use()`
+- 캘린더 그리드·범례·연간 합계는 Kibo UI [Contribution Graph](https://www.kibo-ui.com/components/contribution-graph)를 기반으로 만들었어요.
+- 기여 데이터는 Jonathan Gruber의 [GitHub Contributions API](https://github.com/grubersjoe/github-contributions-api)에서 불러와요.
+- Next.js `unstable_cache`로 하루 동안 캐시하고, `Promise`를 클라이언트에 넘겨 React `use()`로 풀어요.
 
-## Installation
+## 설치
 
 <CodeTabs>
 
@@ -35,11 +35,11 @@ npx shadcn@latest add @smlee/github-contributions
 
 <Steps>
 
-<Step>Install the required shadcn/ui components</Step>
+<Step>필요한 shadcn/ui 컴포넌트를 설치하세요</Step>
 
 - https://ui.shadcn.com/docs/components/tooltip
 
-<Step>Copy and paste the following code into your project</Step>
+<Step>아래 코드를 프로젝트에 복사해 붙여넣으세요</Step>
 
 <ComponentSource
   name="contribution-graph"
@@ -56,7 +56,7 @@ npx shadcn@latest add @smlee/github-contributions
   title="lib/get-cached-contributions.tsx"
 />
 
-<Step>Update the import paths to match your project setup</Step>
+<Step>import 경로를 프로젝트 구조에 맞게 수정하세요</Step>
 
 </Steps>
 
@@ -64,11 +64,11 @@ npx shadcn@latest add @smlee/github-contributions
 
 </CodeTabs>
 
-## Usage
+## 사용법
 
 <ComponentSource name="github-contributions-demo" collapsible="false" />
 
-## API reference
+## API 레퍼런스
 
 ### GitHubContributions
 
@@ -77,33 +77,33 @@ npx shadcn@latest add @smlee/github-contributions
   name="GitHubContributionsProps"
 />
 
-## Examples
+## 예시
 
-### GitHub default theme
+### GitHub 기본 테마
 
 <ComponentPreview
   className="**:data-[slot=preview]:px-0"
   name="github-contributions-default-theme"
 />
 
-### GitHub winter theme
+### GitHub 윈터 테마
 
 <ComponentPreview
   className="**:data-[slot=preview]:px-0"
   name="github-contributions-winter-theme"
 />
 
-### GitHub halloween theme
+### GitHub 할로윈 테마
 
 <ComponentPreview
   className="**:data-[slot=preview]:px-0"
   name="github-contributions-halloween-theme"
 />
 
-## Credits
+## 크레딧
 
 - [Kibo UI](https://www.kibo-ui.com/components/contribution-graph)
 
-## References
+## 참고 자료
 
 - [GitHub Contributions API](https://github.com/grubersjoe/github-contributions-api) by [Jonathan Gruber](https://jogruber.de)

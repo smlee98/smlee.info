@@ -1,19 +1,19 @@
 ---
 title: Haptic Feedback
-description: Trigger haptic feedback on mobile devices.
+description: 모바일 기기에서 햅틱 피드백을 일으켜요.
 createdAt: 2026-03-01
 updatedAt: 2026-03-03
 ---
 
 <ComponentPreview className="**:data-[slot=preview]:p-0" name="haptic-demo" />
 
-## Features
+## 특징
 
-- Uses [Vibration API](https://developer.mozilla.org/docs/Web/API/Vibration_API) on Android and iOS checkbox trick on iOS.
-- Supports custom duration and vibration patterns on Android devices.
-- The haptic functionality was inspired by the [Vercel](https://vercel.com) mobile experience.
+- Android에서는 [Vibration API](https://developer.mozilla.org/docs/Web/API/Vibration_API)를, iOS에서는 체크박스 트릭을 사용해요.
+- Android 기기에서는 진동 시간과 패턴을 자유롭게 지정할 수 있어요.
+- [Vercel](https://vercel.com) 모바일 앱의 햅틱 경험에서 영감을 받았어요.
 
-## Installation
+## 설치
 
 <CodeTabs>
 
@@ -31,11 +31,11 @@ npx shadcn@latest add @smlee/haptic
 
 <Steps>
 
-<Step>Copy and paste the following code into your project</Step>
+<Step>아래 코드를 프로젝트에 복사해 붙여넣으세요</Step>
 
 <ComponentSource name="haptic" title="lib/haptic.ts" />
 
-<Step>Update the import paths to match your project setup</Step>
+<Step>import 경로를 프로젝트 구조에 맞게 수정하세요</Step>
 
 </Steps>
 
@@ -43,7 +43,7 @@ npx shadcn@latest add @smlee/haptic
 
 </CodeTabs>
 
-## Usage
+## 사용법
 
 ```tsx
 import { haptic } from "@/lib/haptic"
@@ -54,11 +54,12 @@ import { haptic } from "@/lib/haptic"
 ```
 
 <Callout>
-  Haptic feedback should not be used arbitrarily. For best practices, please
-  refer to Apple’s Human Interface Guidelines on [Playing
-  haptics](https://developer.apple.com/design/human-interface-guidelines/playing-haptics).
+  햅틱 피드백을 아무 곳에나 쓰지 않는 게 좋아요. 언제 쓰는 게 적절한지는 Apple
+  Human Interface Guidelines의 [Playing
+  haptics](https://developer.apple.com/design/human-interface-guidelines/playing-haptics)
+  문서를 참고하세요.
 </Callout>
 
-## API reference
+## API 레퍼런스
 
 <AutoTypeTable path="src/features/doc/content/props.ts" name="HapticProps" />

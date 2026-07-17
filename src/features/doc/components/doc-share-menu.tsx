@@ -46,11 +46,11 @@ export function DocShareMenu({ title, url }: { title: string; url: string }) {
         <DropdownMenuItem
           onClick={() => {
             copyText(absoluteUrl)
-            toast.success("Link copied")
+            toast.success("링크를 복사했어요")
           }}
         >
           <LinkIcon />
-          Copy link
+          링크 복사
         </DropdownMenuItem>
 
         <DropdownMenuItem
@@ -61,7 +61,7 @@ export function DocShareMenu({ title, url }: { title: string; url: string }) {
               rel="noopener"
             >
               <XIcon />
-              Share on X
+              X에 공유
             </a>
           }
         />
@@ -74,7 +74,7 @@ export function DocShareMenu({ title, url }: { title: string; url: string }) {
               rel="noopener"
             >
               <LinkedInIcon />
-              Share on LinkedIn
+              LinkedIn에 공유
             </a>
           }
         />
@@ -87,7 +87,7 @@ export function DocShareMenu({ title, url }: { title: string; url: string }) {
             }}
           >
             <EllipsisIcon />
-            Other app
+            다른 앱으로 공유
           </DropdownMenuItem>
         )}
       </DropdownMenuContent>

@@ -1,6 +1,6 @@
 ---
 title: Copy Button
-description: Copy text to clipboard with visual, haptic, and audio feedback.
+description: 시각·햅틱·사운드 피드백과 함께 텍스트를 클립보드에 복사해요.
 createdAt: 2026-02-09
 updatedAt: 2026-05-18
 ---
@@ -11,15 +11,15 @@ updatedAt: 2026-05-18
   openInV0Url="https://smlee.info/r/copy-button.json"
 />
 
-## Features
+## 특징
 
-- Animated icon transitions across idle, success, and error states.
-- Haptic feedback confirms copy success on supported devices.
-- UI sounds play distinct success and error cues.
-- Accepts a string or function for dynamic content.
-- Callback support for success and error events.
+- 대기·성공·실패 상태에 따라 아이콘이 자연스럽게 전환돼요.
+- 복사에 성공하면 지원되는 기기에서 햅틱 피드백으로 알려줘요.
+- 성공과 실패를 서로 다른 사운드로 들려줘요.
+- 문자열은 물론 함수를 넘겨 동적인 내용도 복사할 수 있어요.
+- 성공·실패 이벤트에 콜백을 연결할 수 있어요.
 
-## Installation
+## 설치
 
 <CodeTabs>
 
@@ -37,13 +37,13 @@ npx shadcn@latest add @smlee/copy-button
 
 <Steps>
 
-<Step>Install the following dependencies</Step>
+<Step>다음 의존성을 설치하세요</Step>
 
 ```bash
 npm install clsx tailwind-merge class-variance-authority lucide-react motion radix-ui
 ```
 
-<Step>Add a cn helper</Step>
+<Step>cn 헬퍼를 추가하세요</Step>
 
 <ComponentSource
   src="src/registry/lib/utils.ts"
@@ -51,11 +51,11 @@ npm install clsx tailwind-merge class-variance-authority lucide-react motion rad
   collapsible="false"
 />
 
-<Step>Install the required components</Step>
+<Step>필요한 컴포넌트를 설치하세요</Step>
 
 - [Button](https://ui.shadcn.com/docs/components/button)
 
-<Step>Copy and paste the following code into your project</Step>
+<Step>아래 코드를 프로젝트에 복사해 붙여넣으세요</Step>
 
 <ComponentSource
   src="src/hooks/use-copy-to-clipboard.ts"
@@ -66,7 +66,7 @@ npm install clsx tailwind-merge class-variance-authority lucide-react motion rad
 
 <ComponentSource name="copy-button" title="components/copy-button.tsx" />
 
-<Step>Update the import paths to match your project setup</Step>
+<Step>import 경로를 프로젝트 구조에 맞게 수정하세요</Step>
 
 </Steps>
 
@@ -74,7 +74,7 @@ npm install clsx tailwind-merge class-variance-authority lucide-react motion rad
 
 </CodeTabs>
 
-## Usage
+## 사용법
 
 ```tsx
 import { CopyButton } from "@/components/copy-button"
@@ -84,20 +84,20 @@ import { CopyButton } from "@/components/copy-button"
 <CopyButton text="Some text to copy" />
 ```
 
-## API reference
+## API 레퍼런스
 
 ### CopyButton
 
-Extends [Button](https://ui.shadcn.com/docs/components/radix/button) with clipboard functionality.
+[Button](https://ui.shadcn.com/docs/components/radix/button)에 클립보드 기능을 더한 컴포넌트예요.
 
 <AutoTypeTable
   path="src/features/doc/content/props.ts"
   name="CopyButtonProps"
 />
 
-See [shadcn/ui](https://ui.shadcn.com/docs/components/radix/button#api-reference) documentation for more information.
+자세한 내용은 [shadcn/ui](https://ui.shadcn.com/docs/components/radix/button#api-reference) 문서를 참고하세요.
 
-## References
+## 참고 자료
 
 - [WebHaptics](https://haptics.lochie.me) by [@lochieaxon](https://x.com/lochieaxon)
 - [tiks](https://rexa-developer.github.io/tiks) by [Rexa Developer](https://github.com/rexa-developer)

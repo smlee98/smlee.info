@@ -1,6 +1,6 @@
 ---
 title: Icon Swap
-description: Animate icon swaps with scale, blur, and fade transitions.
+description: 스케일·블러·페이드 전환으로 아이콘을 자연스럽게 교체해요.
 createdAt: 2026-05-18
 updatedAt: 2026-05-18
 ---
@@ -10,7 +10,7 @@ updatedAt: 2026-05-18
   openInV0Url="https://smlee.info/r/icon-swap.json"
 />
 
-## Installation
+## 설치
 
 <CodeTabs>
 
@@ -28,17 +28,17 @@ npx shadcn@latest add @smlee/icon-swap
 
 <Steps>
 
-<Step>Install the following dependencies</Step>
+<Step>다음 의존성을 설치하세요</Step>
 
 ```bash
 npm install motion
 ```
 
-<Step>Copy and paste the following code into your project</Step>
+<Step>아래 코드를 프로젝트에 복사해 붙여넣으세요</Step>
 
 <ComponentSource name="icon-swap" title="components/icon-swap.tsx" />
 
-<Step>Update the import paths to match your project setup</Step>
+<Step>import 경로를 프로젝트 구조에 맞게 수정하세요</Step>
 
 </Steps>
 
@@ -46,7 +46,7 @@ npm install motion
 
 </CodeTabs>
 
-## Usage
+## 사용법
 
 ```tsx
 import { IconSwap, IconSwapItem } from "@/components/icon-swap"
@@ -60,11 +60,11 @@ import { IconSwap, IconSwapItem } from "@/components/icon-swap"
 </IconSwap>
 ```
 
-Change the `key` on `IconSwapItem` whenever the icon should swap.
+아이콘을 교체하고 싶은 시점에 `IconSwapItem`의 `key`를 바꿔주세요.
 
-## Composition
+## 구성
 
-Use the following composition to build an `IconSwap`
+`IconSwap`은 다음 구조로 조합해요.
 
 ```text
 IconSwap
@@ -72,6 +72,6 @@ IconSwap
     └── {icon}
 ```
 
-## Credits
+## 크레딧
 
 - [Emil Kowalski](https://emilkowal.ski/ui/7-practical-animation-tips#7.-use-blur-when-nothing-else-works)

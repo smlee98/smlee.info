@@ -93,7 +93,7 @@ export function LLMCopyButton({ markdownUrl }: { markdownUrl: string }) {
         doneIcon={<IconCheck />}
         errorIcon={<IconX />}
       />
-      <span className="max-[28rem]:hidden">Copy page</span>
+      <span className="max-[28rem]:hidden">페이지 복사</span>
     </Button>
   )
 }

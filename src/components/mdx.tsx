@@ -84,8 +84,8 @@ const components: MDXRemoteProps["components"] = {
   TabsContent,
   TabsListInstallType: () => (
     <TabsList>
-      <TabsTrigger value="cli">Command</TabsTrigger>
-      <TabsTrigger value="manual">Manual</TabsTrigger>
+      <TabsTrigger value="cli">명령어</TabsTrigger>
+      <TabsTrigger value="manual">직접 추가</TabsTrigger>
       <TabsIndicator />
     </TabsList>
   ),
