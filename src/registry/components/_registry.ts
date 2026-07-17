@@ -41,7 +41,12 @@ export const components: Registry["items"] = [
     title: "Copy Button",
     description:
       "Copy text to clipboard with visual, haptic, and audio feedback.",
-    dependencies: ["motion", "@rexa-developer/tiks", "web-haptics"],
+    dependencies: [
+      "motion",
+      "@rexa-developer/tiks",
+      "web-haptics",
+      "lucide-react",
+    ],
     registryDependencies: ["button", getRegistryItemUrl("icon-swap")],
     files: [
       {

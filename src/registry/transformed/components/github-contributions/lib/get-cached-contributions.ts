@@ -1,6 +1,6 @@
 import { unstable_cache } from "next/cache"
 
-import type { Activity } from "@/registry/transformed/components/contribution-graph"
+import type { Activity } from "@/registry/components/contribution-graph"
 
 type GitHubContributionsResponse = {
   contributions: Activity[]

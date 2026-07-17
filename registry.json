@@ -19,7 +19,7 @@
         "utilities"
       ],
       "type": "registry:lib",
-      "author": "ncdai <dai@chanhdai.com>"
+      "author": "smlee98 <https://smlee.info>"
     },
     {
       "name": "text-flip",
@@ -30,7 +30,7 @@
       ],
       "files": [
         {
-          "path": "src/registry/components/text-flip/text-flip.tsx",
+          "path": "src/registry/transformed/components/text-flip/text-flip.tsx",
           "type": "registry:component",
           "target": "@components/text-flip.tsx"
         }
@@ -40,7 +40,7 @@
         "text-effects"
       ],
       "type": "registry:component",
-      "author": "ncdai <dai@chanhdai.com>"
+      "author": "smlee98 <https://smlee.info>"
     },
     {
       "name": "chevrons-up-down-icon",
@@ -50,7 +50,7 @@
       ],
       "files": [
         {
-          "path": "src/registry/components/chevrons-up-down-icon/chevrons-up-down-icon.tsx",
+          "path": "src/registry/transformed/components/chevrons-up-down-icon/chevrons-up-down-icon.tsx",
           "type": "registry:component",
           "target": "@components/chevrons-up-down-icon.tsx"
         }
@@ -60,7 +60,7 @@
         "effects"
       ],
       "type": "registry:component",
-      "author": "ncdai <dai@chanhdai.com>"
+      "author": "smlee98 <https://smlee.info>"
     },
     {
       "name": "copy-button",
@@ -69,7 +69,8 @@
       "dependencies": [
         "motion",
         "@rexa-developer/tiks",
-        "web-haptics"
+        "web-haptics",
+        "lucide-react"
       ],
       "registryDependencies": [
         "button",
@@ -77,7 +78,7 @@
       ],
       "files": [
         {
-          "path": "src/registry/components/copy-button/copy-button.tsx",
+          "path": "src/registry/transformed/components/copy-button/copy-button.tsx",
           "type": "registry:component",
           "target": "@components/copy-button.tsx"
         },
@@ -92,7 +93,7 @@
         "utilities"
       ],
       "type": "registry:component",
-      "author": "ncdai <dai@chanhdai.com>"
+      "author": "smlee98 <https://smlee.info>"
     },
     {
       "name": "middle-truncation",
@@ -100,7 +101,7 @@
       "description": "Truncate text in the middle while preserving start and end.",
       "files": [
         {
-          "path": "src/registry/components/middle-truncation/middle-truncation.tsx",
+          "path": "src/registry/transformed/components/middle-truncation/middle-truncation.tsx",
           "type": "registry:component",
           "target": "@components/middle-truncation.tsx"
         }
@@ -110,7 +111,7 @@
         "typography"
       ],
       "type": "registry:component",
-      "author": "ncdai <dai@chanhdai.com>"
+      "author": "smlee98 <https://smlee.info>"
     },
     {
       "name": "contribution-graph",
@@ -121,7 +122,7 @@
       ],
       "files": [
         {
-          "path": "src/registry/components/contribution-graph/contribution-graph.tsx",
+          "path": "src/registry/transformed/components/contribution-graph/contribution-graph.tsx",
           "type": "registry:component",
           "target": "@components/contribution-graph.tsx"
         }
@@ -131,7 +132,7 @@
         "data-display"
       ],
       "type": "registry:component",
-      "author": "ncdai <dai@chanhdai.com>"
+      "author": "smlee98 <https://smlee.info>"
     },
     {
       "name": "github-contributions",
@@ -147,12 +148,12 @@
       ],
       "files": [
         {
-          "path": "src/registry/components/github-contributions/github-contributions.tsx",
+          "path": "src/registry/transformed/components/github-contributions/github-contributions.tsx",
           "type": "registry:component",
           "target": "@components/github-contributions.tsx"
         },
         {
-          "path": "src/registry/components/github-contributions/lib/get-cached-contributions.ts",
+          "path": "src/registry/transformed/components/github-contributions/lib/get-cached-contributions.ts",
           "type": "registry:lib",
           "target": "@lib/get-cached-contributions.ts"
         }
@@ -167,7 +168,7 @@
         "data-display"
       ],
       "type": "registry:component",
-      "author": "ncdai <dai@chanhdai.com>"
+      "author": "smlee98 <https://smlee.info>"
     },
     {
       "name": "icon-swap",
@@ -178,7 +179,7 @@
       ],
       "files": [
         {
-          "path": "src/registry/components/icon-swap/icon-swap.tsx",
+          "path": "src/registry/transformed/components/icon-swap/icon-swap.tsx",
           "type": "registry:component",
           "target": "@components/icon-swap.tsx"
         }
@@ -188,7 +189,7 @@
         "effects"
       ],
       "type": "registry:component",
-      "author": "ncdai <dai@chanhdai.com>"
+      "author": "smlee98 <https://smlee.info>"
     },
     {
       "name": "dot-grid-spotlight",
@@ -196,7 +197,7 @@
       "description": "Interactive dot grid with a cursor-tracking spotlight effect.",
       "files": [
         {
-          "path": "src/registry/components/dot-grid-spotlight/dot-grid-spotlight.tsx",
+          "path": "src/registry/transformed/components/dot-grid-spotlight/dot-grid-spotlight.tsx",
           "type": "registry:component",
           "target": "@components/dot-grid-spotlight.tsx"
         }
@@ -206,7 +207,7 @@
         "effects"
       ],
       "type": "registry:component",
-      "author": "ncdai <dai@chanhdai.com>"
+      "author": "smlee98 <https://smlee.info>"
     }
   ]
 }

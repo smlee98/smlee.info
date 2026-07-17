@@ -34,6 +34,19 @@ const TRANSFORMED_COMPONENTS_PATH = path.join(
 const CPU_COUNT = availableParallelism()
 const COPY_CONCURRENCY = Math.max(4, Math.min(CPU_COUNT, 8))
 
+const REGISTRY_AUTHOR = "smlee98 <https://smlee.info>"
+
+/**
+ * 배포(shadcn build)와 문서 표시는 아이콘이 lucide-react로 치환된
+ * transformed 사본을 사용해야 한다 — 원본은 사이트 전용 IconPlaceholder를 쓴다.
+ */
+function toDistributablePath(filePath: string) {
+  return filePath.replace(
+    /^src\/registry\/components\//,
+    "src/registry/transformed/components/"
+  )
+}
+
 let prettierConfigPromise: Promise<prettier.Options | null> | null = null
 
 const iconProject = new Project({
@@ -58,10 +71,12 @@ export const Index: Record<string, any> = {`
       continue
     }
 
-    const componentFilePath = item.files[0].path
-    const componentPath = componentFilePath.startsWith("src/")
-      ? componentFilePath.replace("src/", "@/")
-      : `@/registry/${componentFilePath}`
+    const componentFilePath = toDistributablePath(
+      item.files[0].path.startsWith("src/")
+        ? item.files[0].path
+        : `src/registry/${item.files[0].path}`
+    )
+    const componentPath = componentFilePath.replace("src/", "@/")
 
     index += `
   "${item.name}": {
@@ -69,9 +84,9 @@ export const Index: Record<string, any> = {`
     description: "${item.description ?? ""}",
     type: "${item.type}",
     files: [${item.files.map((file) => {
-      const filePath = file.path.startsWith("src/")
-        ? file.path
-        : `src/registry/${file.path}`
+      const filePath = toDistributablePath(
+        file.path.startsWith("src/") ? file.path : `src/registry/${file.path}`
+      )
       return `{
       path: "${filePath}",
       type: "${file.type}",
@@ -102,16 +117,16 @@ export const Index: Record<string, any> = {`
         .map((item) => {
           return {
             ...item,
-            author: item.author ?? "ncdai <dai@chanhdai.com>",
+            author: item.author ?? REGISTRY_AUTHOR,
             files:
               item.files?.map((file) => {
-                if (file.path.startsWith("src/")) {
-                  return file
-                }
-
                 return {
                   ...file,
-                  path: `src/registry/${file.path}`,
+                  path: toDistributablePath(
+                    file.path.startsWith("src/")
+                      ? file.path
+                      : `src/registry/${file.path}`
+                  ),
                 }
               }) ?? [],
           }
@@ -266,13 +281,6 @@ async function syncDirectory({
   return changedPaths.flat()
 }
 
-function rewriteRegistryComponentsImportsToTransformed(content: string) {
-  return content.replaceAll(
-    `@/registry/components/`,
-    `@/registry/transformed/components/`
-  )
-}
-
 async function applyIconTransform(content: string, filename: string) {
   if (!content.includes("IconPlaceholder")) {
     return content
@@ -317,16 +325,18 @@ async function formatGeneratedSource(content: string, filePath: string) {
 
 /**
  * Copy src/registry/components to src/registry/transformed/components with transformations:
- * 1. Rewrite imports to point to transformed components.
- * 2. Apply icon transformation for .tsx files.
- * 3. Format transformed source with Prettier.
+ * 1. Apply icon transformation for .tsx files.
+ * 2. Format transformed source with Prettier.
+ *
+ * 내부 임포트는 원본 형태(@/registry/components/...)를 유지한다 —
+ * shadcn CLI가 설치 시점에 이 형태만 소비자 경로로 재작성해준다.
  */
 async function copyComponentsToTransformed() {
   await syncDirectory({
     fromDir: COMPONENTS_PATH,
     toDir: TRANSFORMED_COMPONENTS_PATH,
     transformContent: async (content, filePath, targetPath) => {
-      let nextContent = rewriteRegistryComponentsImportsToTransformed(content)
+      let nextContent = content
 
       if (filePath.endsWith(".tsx")) {
         nextContent = await applyIconTransform(

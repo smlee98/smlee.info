@@ -18,6 +18,18 @@ updatedAt: 2026-02-20
 
 <TabsContent value="cli">
 
+처음이라면 components.json에 `@smlee` 레지스트리를 한 번만 등록하세요.
+
+```json
+{
+  "registries": {
+    "@smlee": "https://smlee.info/r/{name}.json"
+  }
+}
+```
+
+그다음 컴포넌트를 추가해요.
+
 ```bash
 npx shadcn@latest add @smlee/text-flip
 ```

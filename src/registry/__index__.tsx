@@ -29,12 +29,12 @@ export const Index: Record<string, any> = {
     description: "Animated text that cycles through items with a smooth flip transition.",
     type: "registry:component",
     files: [{
-      path: "src/registry/components/text-flip/text-flip.tsx",
+      path: "src/registry/transformed/components/text-flip/text-flip.tsx",
       type: "registry:component",
       target: "@components/text-flip.tsx",
     }],
     component: React.lazy(async () => {
-      const mod = await import("@/registry/components/text-flip/text-flip.tsx")
+      const mod = await import("@/registry/transformed/components/text-flip/text-flip.tsx")
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || item.name
       return { default: mod.default || mod[exportName] }
     }),
@@ -46,12 +46,12 @@ export const Index: Record<string, any> = {
     description: "Animated chevrons icon that morphs between up and down directions.",
     type: "registry:component",
     files: [{
-      path: "src/registry/components/chevrons-up-down-icon/chevrons-up-down-icon.tsx",
+      path: "src/registry/transformed/components/chevrons-up-down-icon/chevrons-up-down-icon.tsx",
       type: "registry:component",
       target: "@components/chevrons-up-down-icon.tsx",
     }],
     component: React.lazy(async () => {
-      const mod = await import("@/registry/components/chevrons-up-down-icon/chevrons-up-down-icon.tsx")
+      const mod = await import("@/registry/transformed/components/chevrons-up-down-icon/chevrons-up-down-icon.tsx")
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || item.name
       return { default: mod.default || mod[exportName] }
     }),
@@ -63,7 +63,7 @@ export const Index: Record<string, any> = {
     description: "Copy text to clipboard with visual, haptic, and audio feedback.",
     type: "registry:component",
     files: [{
-      path: "src/registry/components/copy-button/copy-button.tsx",
+      path: "src/registry/transformed/components/copy-button/copy-button.tsx",
       type: "registry:component",
       target: "@components/copy-button.tsx",
     },{
@@ -72,7 +72,7 @@ export const Index: Record<string, any> = {
       target: "@hooks/use-copy-to-clipboard.ts",
     }],
     component: React.lazy(async () => {
-      const mod = await import("@/registry/components/copy-button/copy-button.tsx")
+      const mod = await import("@/registry/transformed/components/copy-button/copy-button.tsx")
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || item.name
       return { default: mod.default || mod[exportName] }
     }),
@@ -84,12 +84,12 @@ export const Index: Record<string, any> = {
     description: "Truncate text in the middle while preserving start and end.",
     type: "registry:component",
     files: [{
-      path: "src/registry/components/middle-truncation/middle-truncation.tsx",
+      path: "src/registry/transformed/components/middle-truncation/middle-truncation.tsx",
       type: "registry:component",
       target: "@components/middle-truncation.tsx",
     }],
     component: React.lazy(async () => {
-      const mod = await import("@/registry/components/middle-truncation/middle-truncation.tsx")
+      const mod = await import("@/registry/transformed/components/middle-truncation/middle-truncation.tsx")
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || item.name
       return { default: mod.default || mod[exportName] }
     }),
@@ -101,12 +101,12 @@ export const Index: Record<string, any> = {
     description: "A GitHub-style contribution graph component that displays activity levels over time.",
     type: "registry:component",
     files: [{
-      path: "src/registry/components/contribution-graph/contribution-graph.tsx",
+      path: "src/registry/transformed/components/contribution-graph/contribution-graph.tsx",
       type: "registry:component",
       target: "@components/contribution-graph.tsx",
     }],
     component: React.lazy(async () => {
-      const mod = await import("@/registry/components/contribution-graph/contribution-graph.tsx")
+      const mod = await import("@/registry/transformed/components/contribution-graph/contribution-graph.tsx")
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || item.name
       return { default: mod.default || mod[exportName] }
     }),
@@ -118,16 +118,16 @@ export const Index: Record<string, any> = {
     description: "Visualize year-long GitHub contribution activity with daily counts, tooltips, and a profile link.",
     type: "registry:component",
     files: [{
-      path: "src/registry/components/github-contributions/github-contributions.tsx",
+      path: "src/registry/transformed/components/github-contributions/github-contributions.tsx",
       type: "registry:component",
       target: "@components/github-contributions.tsx",
     },{
-      path: "src/registry/components/github-contributions/lib/get-cached-contributions.ts",
+      path: "src/registry/transformed/components/github-contributions/lib/get-cached-contributions.ts",
       type: "registry:lib",
       target: "@lib/get-cached-contributions.ts",
     }],
     component: React.lazy(async () => {
-      const mod = await import("@/registry/components/github-contributions/github-contributions.tsx")
+      const mod = await import("@/registry/transformed/components/github-contributions/github-contributions.tsx")
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || item.name
       return { default: mod.default || mod[exportName] }
     }),
@@ -139,12 +139,12 @@ export const Index: Record<string, any> = {
     description: "Animate icon swaps with scale, blur, and fade transitions.",
     type: "registry:component",
     files: [{
-      path: "src/registry/components/icon-swap/icon-swap.tsx",
+      path: "src/registry/transformed/components/icon-swap/icon-swap.tsx",
       type: "registry:component",
       target: "@components/icon-swap.tsx",
     }],
     component: React.lazy(async () => {
-      const mod = await import("@/registry/components/icon-swap/icon-swap.tsx")
+      const mod = await import("@/registry/transformed/components/icon-swap/icon-swap.tsx")
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || item.name
       return { default: mod.default || mod[exportName] }
     }),
@@ -156,12 +156,12 @@ export const Index: Record<string, any> = {
     description: "Interactive dot grid with a cursor-tracking spotlight effect.",
     type: "registry:component",
     files: [{
-      path: "src/registry/components/dot-grid-spotlight/dot-grid-spotlight.tsx",
+      path: "src/registry/transformed/components/dot-grid-spotlight/dot-grid-spotlight.tsx",
       type: "registry:component",
       target: "@components/dot-grid-spotlight.tsx",
     }],
     component: React.lazy(async () => {
-      const mod = await import("@/registry/components/dot-grid-spotlight/dot-grid-spotlight.tsx")
+      const mod = await import("@/registry/transformed/components/dot-grid-spotlight/dot-grid-spotlight.tsx")
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || item.name
       return { default: mod.default || mod[exportName] }
     }),

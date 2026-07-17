@@ -10,7 +10,7 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip"
-import type { Activity } from "@/registry/transformed/components/contribution-graph"
+import type { Activity } from "@/registry/components/contribution-graph"
 import {
   ContributionGraph,
   ContributionGraphBlock,
@@ -18,7 +18,7 @@ import {
   ContributionGraphFooter,
   ContributionGraphLegend,
   ContributionGraphTotalCount,
-} from "@/registry/transformed/components/contribution-graph"
+} from "@/registry/components/contribution-graph"
 
 export function GitHubContributions({
   contributions,
