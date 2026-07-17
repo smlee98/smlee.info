@@ -8,12 +8,13 @@ import {
   MARK_VIEWBOX_WIDTH,
 } from "@/components/smlee-mark"
 
-const pretendardSemiBold = readFileSync(
-  join(process.cwd(), "src/assets/fonts/Pretendard-SemiBold.otf")
+// satori는 woff2를 읽지 못하므로 OG용 폰트만 정적 TTF를 사용한다
+const wantedSansSemiBold = readFileSync(
+  join(process.cwd(), "src/assets/fonts/ttf/WantedSans-SemiBold.ttf")
 )
 
 const monoplexKRRegular = readFileSync(
-  join(process.cwd(), "src/assets/fonts/MonoplexKR-Regular.ttf")
+  join(process.cwd(), "src/assets/fonts/ttf/MonoplexKR-Regular.ttf")
 )
 
 export async function GET(request: Request) {
@@ -44,7 +45,7 @@ export async function GET(request: Request) {
         <div
           tw="border-t-2 border-b-2 border-zinc-800 px-18"
           style={{
-            fontFamily: "Pretendard",
+            fontFamily: "Wanted Sans",
             fontWeight: 600,
             fontSize: 64,
             lineHeight: 1,
@@ -78,8 +79,8 @@ export async function GET(request: Request) {
       height: 630,
       fonts: [
         {
-          name: "Pretendard",
-          data: pretendardSemiBold,
+          name: "Wanted Sans",
+          data: wantedSansSemiBold,
           weight: 600,
         },
         {

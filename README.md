@@ -54,7 +54,7 @@ http://localhost:3000 — 끝이에요.
 
 ## 만든 재료
 
-Next.js 16 (App Router) · React 19 · Tailwind CSS v4 · shadcn/ui (Radix UI + Base UI) · MDX (`next-mdx-remote` + `gray-matter`) · Pretendard & Monoplex KR
+Next.js 16 (App Router) · React 19 · Tailwind CSS v4 · shadcn/ui (Radix UI + Base UI) · MDX (`next-mdx-remote` + `gray-matter`) · Wanted Sans & Monoplex KR
 
 [chanhdai.com](https://chanhdai.com)을 포크해서 다시 지었어요.
 

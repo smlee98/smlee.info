@@ -20,7 +20,7 @@
 | `hooks/`      | 공용 React 훅 (`use-media-query`, `use-copy-to-clipboard`, soundcn 등)                           |
 | `utils/`      | 순수 유틸 함수 — 테스트가 함께 있는 유일한 곳 (`*.test.ts`)                                      |
 | `styles/`     | 전역 CSS: `globals.css`, `shadcn-tailwind.css` (Tailwind v4 — JS 설정 파일 없음)                 |
-| `assets/`     | 폰트 바이너리(Pretendard, Monoplex KR), libphonenumber 메타데이터                                |
+| `assets/`     | 폰트 바이너리(Wanted Sans, Monoplex KR), libphonenumber 메타데이터                               |
 | `scripts/`    | `build-registry.mts` — 레지스트리 빌드 (`yarn registry:build`)                                   |
 | `types/`      | 전역 타입 (`nav.ts`, `unist.ts`)                                                                 |
 
