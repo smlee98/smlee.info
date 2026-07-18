@@ -1,0 +1,44 @@
+/* Styles for the on-screen /resume and /portfolio preview documents.
+ *
+ * The toolbar is themed and screen-only. The document "sheet" is always
+ * rendered light (paper-like) regardless of theme, mirroring the exported PDF.
+ * @page rules are kept so a browser Ctrl+P still produces a clean result. */
+
+.preview-root {
+  color-scheme: light;
+}
+
+@media screen {
+  .preview-sheet {
+    width: 210mm;
+    max-width: 100%;
+    margin-inline: auto;
+  }
+}
+
+@media print {
+  @page {
+    size: A4;
+    margin: 14mm;
+  }
+
+  html,
+  body {
+    background: #ffffff !important;
+  }
+
+  .preview-root {
+    min-height: 0 !important;
+    background: #ffffff !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .preview-sheet {
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+  }
+}

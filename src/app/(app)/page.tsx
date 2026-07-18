@@ -7,6 +7,7 @@ import { absoluteUrl, cn } from "@/lib/utils"
 import { Blog } from "@/features/portfolio/components/blog"
 import { Certifications } from "@/features/portfolio/components/certifications"
 import { Components } from "@/features/portfolio/components/components"
+import { DownloadActions } from "@/features/portfolio/components/download-actions"
 import { Education } from "@/features/portfolio/components/education"
 import { Experiences } from "@/features/portfolio/components/experiences"
 import { GitHubContributions } from "@/features/portfolio/components/github-contributions"
@@ -35,7 +36,7 @@ export default function HomePage() {
       <div className="[--separator-height:--spacing(8)] **:data-[slot=panel]:scroll-mt-[calc(var(--header-height)+var(--separator-height))]">
         <div className="mx-auto md:max-w-3xl">
           <ProfileHeader />
-          <Separator />
+          <DownloadActions />
 
           <Overview />
           <SocialLinks />
